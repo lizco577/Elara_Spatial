@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Elara Spatial — Iteration Index</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --magenta:#f0f;
+  --magenta-btn:#d000d0;
+  --lavendar:#7f80ff;
+  --black:#000;
+  --white:#fff;
+  --grey:#f5f5f5;
+  --rule:rgba(0,0,0,.1);
+  --muted:rgba(0,0,0,.45);
+  --heading:"Geist",-apple-system,sans-serif;
+  --body:"Inter",-apple-system,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{
+  margin:0;background:var(--white);color:var(--black);
+  font-family:var(--body);font-size:16px;line-height:30px;
+  -webkit-font-smoothing:antialiased;
+}
+h1{margin:0;font-family:var(--heading);font-weight:900;font-size:40px;line-height:normal;letter-spacing:-.005em}
+p{margin:0}
+
+.wrap{max-width:1440px;margin:0 auto;padding:80px}
+
+/* ---------- header ---------- */
+.head{display:flex;align-items:flex-start;justify-content:space-between;gap:40px;margin-bottom:64px}
+.eyebrow{
+  font-size:12px;line-height:18px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:16px;
+}
+.head__lede{max-width:520px;color:var(--muted);font-size:16px;line-height:28px;margin-top:16px}
+.head__logo{width:180px;height:auto;flex-shrink:0;margin-top:4px}
+
+/* ---------- list ---------- */
+.list{border-top:1px solid var(--rule)}
+
+.it{position:relative;display:flex;align-items:center;border-bottom:1px solid var(--rule)}
+.it::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:var(--magenta-btn);transform:scaleY(0);transform-origin:50% 50%;
+  transition:transform .2s ease;
+}
+.it:hover::before{transform:scaleY(1)}
+.it:hover{background:#fbfbfb}
+
+/* pin */
+.it__pin{
+  flex-shrink:0;width:44px;height:64px;margin:0;padding:0;
+  background:none;border:0;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+}
+.it__pin span{
+  display:block;width:13px;height:13px;border-radius:50%;
+  border:1.5px solid rgba(0,0,0,.28);background:transparent;
+  transition:background-color .18s ease,border-color .18s ease,transform .18s ease;
+}
+.it__pin:hover span{border-color:var(--magenta-btn);transform:scale(1.15)}
+.it__pin[aria-pressed="true"] span{background:var(--magenta-btn);border-color:var(--magenta-btn)}
+.it__pin:focus-visible{outline:2px solid var(--magenta-btn);outline-offset:-4px}
+
+/* the rest of the row is the link */
+.it__link{
+  flex:1 0 0;min-width:1px;display:flex;align-items:baseline;gap:20px;
+  padding:18px 8px 18px 0;text-decoration:none;color:inherit;
+}
+.it__link:focus-visible{outline:2px solid var(--magenta-btn);outline-offset:-4px}
+.it__num{
+  flex-shrink:0;width:28px;font-size:12px;line-height:30px;color:var(--muted);
+  font-variant-numeric:tabular-nums;letter-spacing:.06em;
+}
+.it__title{
+  flex-shrink:0;font-family:var(--heading);font-weight:900;font-size:20px;line-height:30px;
+}
+.it__desc{
+  flex:1 0 0;min-width:1px;font-size:14px;line-height:30px;color:var(--muted);
+}
+.it__arrow{
+  flex-shrink:0;font-size:16px;line-height:30px;color:rgba(0,0,0,.25);
+  transition:transform .2s ease,color .2s ease;
+}
+.it:hover .it__arrow{color:var(--magenta-btn);transform:translateX(6px)}
+
+/* ---------- footer count ---------- */
+.count{
+  margin-top:32px;font-size:12px;line-height:18px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);
+}
+.count b{color:var(--black);font-weight:700}
+
+/* ---------- hover preview ---------- */
+.preview{
+  position:fixed;z-index:100;width:440px;
+  background:var(--white);border:1px solid rgba(0,0,0,.12);
+  box-shadow:0 20px 60px rgba(0,0,0,.16);
+  opacity:0;pointer-events:none;
+  transform:translateY(8px) scale(.985);transform-origin:100% 50%;
+  transition:opacity .18s ease,transform .18s ease;
+}
+.preview.is-visible{opacity:1;transform:none}
+.preview__frame{position:relative;width:438px;height:274px;overflow:hidden;background:var(--black)}
+.preview__frame iframe{
+  position:absolute;top:0;left:0;width:1440px;height:900px;border:0;
+  transform:scale(.30417);transform-origin:0 0;
+}
+.preview__meta{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:10px 14px;border-top:1px solid var(--rule);
+  font-size:11px;line-height:16px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+}
+.preview__spinner{color:var(--magenta-btn)}
+
+@media (prefers-reduced-motion:reduce){
+  .preview{transition:none}
+  .it::before,.it__arrow{transition:none}
+}
+</style>
+</head>
+<body>
+
+<!-- logo mark, reused from the site -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="elara-mark" viewBox="0 0 74.82 75.28">
+    <path d="M65.96 75.28H43.11L37.41 69.58L31.71 75.28H8.86L0 66.42V43.34L5.7 37.64L0 31.94V8.86L8.86 0H31.71L37.41 5.7L43.11 0H65.96L74.82 8.86V31.94L69.12 37.64L74.82 43.34V66.42L65.96 75.28ZM45.72 68.97H63.34L68.5 63.81V45.96L60.18 37.64L68.5 29.32V11.47L63.34 6.31H45.72L37.4 14.63L29.08 6.31H11.47L6.31 11.47V29.32L14.63 37.64L6.31 45.96V63.81L11.47 68.97H29.09L37.41 60.65L45.73 68.97H45.72Z" fill="url(#ix-ring)"/>
+    <path d="M68.06 37.64L37.41 6.97998L6.74997 37.64L37.4 68.29L68.05 37.64L68.06 37.64ZM37.41 15.91L59.14 37.64L37.41 59.37L15.68 37.64L37.41 15.91Z" fill="url(#ix-diamond)"/>
+    <path d="M37.4042 30.3918L30.1635 37.6326L37.4042 44.8733L44.645 37.6326L37.4042 30.3918Z" fill="#000"/>
+  </symbol>
+  <defs>
+    <linearGradient id="ix-ring" x1="0" y1="0" x2="74.82" y2="75.28" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0ff"/><stop offset="1" stop-color="#f0f"/>
+    </linearGradient>
+    <linearGradient id="ix-diamond" x1="6.75" y1="6.98" x2="68.06" y2="68.29" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0ff"/><stop offset="1" stop-color="#f0f"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<div class="wrap">
+
+  <header class="head">
+    <div>
+      <p class="eyebrow">Elara Spatial &mdash; Iteration Index</p>
+      <h1>Every direction, in one place.</h1>
+      <p class="head__lede">
+        Each row opens a full working version of the site. Hover to preview it,
+        tap the dot to pin the ones worth keeping.
+      </p>
+    </div>
+    <svg class="head__logo" viewBox="0 0 74.82 75.28" role="img" aria-label="Elara Spatial"><use href="#elara-mark"/></svg>
+  </header>
+
+  <!-- ============================================================
+       To add an iteration: copy one <article> block, bump data-id
+       (it drives the saved pin state, so keep it unique), set the
+       number, title, description, href and data-preview.
+       ============================================================ -->
+  <div class="list" id="list">
+
+    <article class="it" data-id="it-00" data-preview="iteration-00.html?preview=1">
+      <button class="it__pin" type="button" aria-pressed="false" aria-label="Pin this iteration"><span></span></button>
+      <a class="it__link" href="iteration-00.html">
+        <span class="it__num">00</span>
+        <span class="it__title">Iteration 00 &mdash; Wireframes</span>
+        <span class="it__desc">All seven pages in greyscale &middot; every section, FAQ accordion and form working &middot; structure before styling</span>
+        <span class="it__arrow">&rarr;</span>
+      </a>
+    </article>
+
+    <article class="it" data-id="it-01" data-preview="iteration-01.html?preview=1">
+      <button class="it__pin" type="button" aria-pressed="false" aria-label="Pin this iteration"><span></span></button>
+      <a class="it__link" href="iteration-01.html">
+        <span class="it__num">01</span>
+        <span class="it__title">Iteration 01 &mdash; Desktop Foundation</span>
+        <span class="it__desc">Home, What It Is, Company, Contact &middot; loader intro morphing into the nav &middot; benefits tabs, live contact form</span>
+        <span class="it__arrow">&rarr;</span>
+      </a>
+    </article>
+
+    <article class="it" data-id="it-02" data-preview="iteration-02.html?preview=1">
+      <button class="it__pin" type="button" aria-pressed="false" aria-label="Pin this iteration"><span></span></button>
+      <a class="it__link" href="iteration-02.html">
+        <span class="it__num">02</span>
+        <span class="it__title">Iteration 02 &mdash; Bento Style</span>
+        <span class="it__desc">Floating glass pill nav &middot; full-bleed hero card &middot; dark bento overview grid replacing the first scroll</span>
+        <span class="it__arrow">&rarr;</span>
+      </a>
+    </article>
+
+    <article class="it" data-id="it-03" data-preview="iteration-03.html?preview=1">
+      <button class="it__pin" type="button" aria-pressed="false" aria-label="Pin this iteration"><span></span></button>
+      <a class="it__link" href="iteration-03.html">
+        <span class="it__num">03</span>
+        <span class="it__title">Iteration 03 &mdash; Full Bleed</span>
+        <span class="it__desc">Edge-to-edge hero video &middot; full-width nav bar &middot; stat cards with gradient rules &middot; counting numbers</span>
+        <span class="it__arrow">&rarr;</span>
+      </a>
+    </article>
+
+    <article class="it" data-id="it-04" data-preview="iteration-04.html?preview=1">
+      <button class="it__pin" type="button" aria-pressed="false" aria-label="Pin this iteration"><span></span></button>
+      <a class="it__link" href="iteration-04.html">
+        <span class="it__num">04</span>
+        <span class="it__title">Iteration 04 &mdash; Moodboard Based</span>
+        <span class="it__desc">Brand tokens with moodboard atmosphere &middot; contour fields, glyph lattice, gradient orbs &middot; Home, How It Works, Company</span>
+        <span class="it__arrow">&rarr;</span>
+      </a>
+    </article>
+
+    <article class="it" data-id="it-05" data-preview="iteration-05.html?preview=1">
+      <button class="it__pin" type="button" aria-pressed="false" aria-label="Pin this iteration"><span></span></button>
+      <a class="it__link" href="iteration-05.html">
+        <span class="it__num">05</span>
+        <span class="it__title">Iteration 05 &mdash; Editorial</span>
+        <span class="it__desc">Biograph-inspired restraint &middot; paper-white canvas, light display type, hairline rules &middot; stat rail hero, dark carousel, dense grids</span>
+        <span class="it__arrow">&rarr;</span>
+      </a>
+    </article>
+
+    <article class="it" data-id="it-06" data-preview="iteration-06.html?preview=1">
+      <button class="it__pin" type="button" aria-pressed="false" aria-label="Pin this iteration"><span></span></button>
+      <a class="it__link" href="iteration-06.html">
+        <span class="it__num">06</span>
+        <span class="it__title">Iteration 06 &mdash; Editorial (Complete)</span>
+        <span class="it__desc">All seven pages in the editorial system &middot; What It Is, AI Responsibility, Blog and Contact fleshed out &middot; working contact form</span>
+        <span class="it__arrow">&rarr;</span>
+      </a>
+    </article>
+
+    <article class="it" data-id="it-07" data-preview="iteration-07.html?preview=1">
+      <button class="it__pin" type="button" aria-pressed="false" aria-label="Pin this iteration"><span></span></button>
+      <a class="it__link" href="iteration-07.html">
+        <span class="it__num">07</span>
+        <span class="it__title">Iteration 07 &mdash; Luma Site</span>
+        <span class="it__desc">Microsite for LUMASITE &middot; lavendar-led sub-brand in the editorial system &middot; scroll-scrubbed platform section, counter-scrolling columns and a scroll-driven marquee</span>
+        <span class="it__arrow">&rarr;</span>
+      </a>
+    </article>
+
+    <article class="it" data-id="it-08" data-preview="iteration-08.html?preview=1">
+      <button class="it__pin" type="button" aria-pressed="false" aria-label="Pin this iteration"><span></span></button>
+      <a class="it__link" href="iteration-08.html">
+        <span class="it__num">08</span>
+        <span class="it__title">Iteration 08 &mdash; Luma Site (Mark-led)</span>
+        <span class="it__desc">LUMASITE logo lockup and Figma nav &middot; hero and platform rebuilt around the mark&rsquo;s microanimations instead of video &middot; keeps 07&rsquo;s situation, getting started and CTA</span>
+        <span class="it__arrow">&rarr;</span>
+      </a>
+    </article>
+
+    <article class="it" data-id="it-09" data-preview="iteration-09.html?preview=1">
+      <button class="it__pin" type="button" aria-pressed="false" aria-label="Pin this iteration"><span></span></button>
+      <a class="it__link" href="iteration-09.html">
+        <span class="it__num">09</span>
+        <span class="it__title">Iteration 09 &mdash; Luma Site (Alt hero)</span>
+        <span class="it__desc">Identical to 08 &middot; the only difference is the hero video</span>
+        <span class="it__arrow">&rarr;</span>
+      </a>
+    </article>
+
+    <article class="it" data-id="it-10" data-preview="iteration-10.html?preview=1">
+      <button class="it__pin" type="button" aria-pressed="false" aria-label="Pin this iteration"><span></span></button>
+      <a class="it__link" href="iteration-10.html">
+        <span class="it__num">10</span>
+        <span class="it__title">Iteration 10 &mdash; Editorial (Working copy)</span>
+        <span class="it__desc">A copy of 06, kept as a working surface so 06 stays intact</span>
+        <span class="it__arrow">&rarr;</span>
+      </a>
+    </article>
+
+  </div>
+
+  <p class="count" id="count"></p>
+</div>
+
+<!-- live hover preview -->
+<div class="preview" id="preview" aria-hidden="true">
+  <div class="preview__frame"><iframe id="preview-iframe" tabindex="-1" scrolling="no" title="Iteration preview" loading="lazy"></iframe></div>
+  <div class="preview__meta">
+    <span id="preview-label"></span>
+    <span class="preview__spinner" id="preview-state">Loading&hellip;</span>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var STORE   = 'elaraPinnedIterations';
+  var list    = document.getElementById('list');
+  var rows    = Array.prototype.slice.call(list.querySelectorAll('.it'));
+  var countEl = document.getElementById('count');
+
+  var preview  = document.getElementById('preview');
+  var frame    = document.getElementById('preview-iframe');
+  var pLabel   = document.getElementById('preview-label');
+  var pState   = document.getElementById('preview-state');
+
+  /* ---------------- pin state ---------------- */
+  function readPins() {
+    try { return JSON.parse(localStorage.getItem(STORE)) || []; }
+    catch (e) { return []; }
+  }
+  function writePins(ids) {
+    try { localStorage.setItem(STORE, JSON.stringify(ids)); } catch (e) {}
+  }
+
+  var pinned = readPins();
+
+  function isPinned(id) { return pinned.indexOf(id) !== -1; }
+
+  function renderCount() {
+    var n = rows.length;
+    var p = rows.filter(function (r) { return isPinned(r.dataset.id); }).length;
+    countEl.innerHTML =
+      '<b>' + n + '</b> iteration' + (n === 1 ? '' : 's') +
+      ' &mdash; <b>' + p + '</b> pinned';
+  }
+
+  function paintRow(row) {
+    var btn = row.querySelector('.it__pin');
+    var on  = isPinned(row.dataset.id);
+    btn.setAttribute('aria-pressed', String(on));
+    btn.setAttribute('aria-label', (on ? 'Unpin' : 'Pin') + ' this iteration');
+  }
+
+  rows.forEach(function (row) {
+    paintRow(row);
+    row.querySelector('.it__pin').addEventListener('click', function (e) {
+      e.preventDefault();
+      var id = row.dataset.id;
+      if (isPinned(id)) pinned = pinned.filter(function (x) { return x !== id; });
+      else pinned = pinned.concat(id);
+      writePins(pinned);
+      paintRow(row);
+      renderCount();
+    });
+  });
+
+  renderCount();
+
+  /* ---------------- hover preview ----------------
+     The thumbnail is the real page in an iframe at 1440x900, scaled down —
+     no screenshots to keep in sync. ?preview=1 tells the iteration page to
+     skip its loader intro and hide the dev chrome. Frames load on first
+     hover only, so opening this page costs nothing. */
+  var loaded = {};
+  var current = null;
+  var hideTimer;
+
+  function place(row) {
+    var r = row.getBoundingClientRect();
+    var h = preview.offsetHeight || 320;
+    var top = r.top + r.height / 2 - h / 2;
+    top = Math.max(16, Math.min(top, window.innerHeight - h - 16));
+    preview.style.top = top + 'px';
+    preview.style.left = 'auto';
+    preview.style.right = '80px';
+  }
+
+  function show(row) {
+    clearTimeout(hideTimer);
+    var src = row.dataset.preview;
+    if (!src) return;
+    current = row;
+
+    pLabel.textContent = row.querySelector('.it__title').textContent;
+
+    if (loaded[src]) {
+      pState.textContent = 'Live preview';
+    } else {
+      pState.textContent = 'Loading…';
+      frame.addEventListener('load', function onLoad() {
+        frame.removeEventListener('load', onLoad);
+        loaded[src] = true;
+        if (current) pState.textContent = 'Live preview';
+      });
+    }
+    if (frame.getAttribute('src') !== src) frame.setAttribute('src', src);
+
+    place(row);
+    preview.classList.add('is-visible');
+    preview.setAttribute('aria-hidden', 'false');
+  }
+
+  function hide() {
+    current = null;
+    hideTimer = setTimeout(function () {
+      preview.classList.remove('is-visible');
+      preview.setAttribute('aria-hidden', 'true');
+    }, 90);
+  }
+
+  rows.forEach(function (row) {
+    row.addEventListener('mouseenter', function () { show(row); });
+    row.addEventListener('mouseleave', hide);
+    /* keyboard users get it too */
+    row.querySelector('.it__link').addEventListener('focus', function () { show(row); });
+    row.querySelector('.it__link').addEventListener('blur', hide);
+  });
+
+  window.addEventListener('scroll', function () { if (current) place(current); }, { passive: true });
+  window.addEventListener('resize', function () { if (current) place(current); });
+})();
+</script>
+</body>
+</html>

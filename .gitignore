@@ -1,0 +1,17 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# editors
+.vscode/
+.idea/
+*.swp
+
+# stray probe file, safe to delete from disk
+.__deltest
+.vercel
+.env*
+
+# local backup of previous repo
+.git-old/

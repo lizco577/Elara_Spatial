@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Elara Spatial — Moodboard Based</title>
+<meta name="viewport" content="width=1440">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+<script>
+(function(){ if(/[?&]preview\b/.test(location.search)) document.documentElement.className += ' is-preview'; })();
+</script>
+<style>
+/* ============================================================
+   Iteration 04 — Moodboard Based
+   Tokens straight from the brand guidelines; composition and
+   atmosphere from the curated moodboard.
+     colour     magenta / cyan / lavendar + dark web-safe variants
+     type       Geist Black headlines, Inter body
+     pattern    contour lines + a lattice built from the glyph
+     gradient   linear for surfaces, angular for the logomark
+   ============================================================ */
+:root{
+  --black:#000;
+  --white:#fff;
+  --magenta:#FF00FF;
+  --cyan:#00FFFF;
+  --lav:#7F80FF;
+  --magenta-d:#D000D0;   /* accessible on white */
+  --cyan-d:#008282;
+  --lav-d:#6566D9;
+
+  --surface:#0A0A0B;
+  --surface-2:#131317;
+  --line:rgba(255,255,255,.13);
+  --line-lt:rgba(0,0,0,.1);
+  --mut:rgba(255,255,255,.6);
+  --mut-lt:rgba(0,0,0,.56);
+
+  --grad-y:linear-gradient(180deg,#00FFFF 0%,#7F80FF 52%,#FF00FF 100%);
+  --grad-x:linear-gradient(90deg,#00FFFF 0%,#7F80FF 50%,#FF00FF 100%);
+  --grad-deep:linear-gradient(180deg,#008282 0%,#33407A 38%,#6B2A86 72%,#8F0080 100%);
+  --grad-angular:conic-gradient(from 90deg at 50% 50%,#00FFFF 0deg,#FF00FF 180deg,#00FFFF 360deg);
+
+  --heading:"Geist",-apple-system,sans-serif;
+  --body:"Inter",-apple-system,sans-serif;
+  --wrap:1240px;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;min-width:1440px;background:var(--black);color:var(--white);
+  font-family:var(--body);font-size:16px;line-height:1.75;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+p{margin:0}
+ul{margin:0;padding:0;list-style:none}
+button{font:inherit;color:inherit}
+img,svg{display:block}
+
+/* ---------------- type scale (brand p.10) ---------------- */
+h1,h2,h3{margin:0;font-family:var(--heading);font-weight:900;letter-spacing:-.025em;line-height:1.04}
+h1{font-size:60px}
+h2{font-size:40px;line-height:1.08}
+h3{font-family:var(--body);font-weight:700;font-size:20px;line-height:1.4;letter-spacing:0}
+.label{
+  font-size:16px;font-weight:400;line-height:1.5;
+  text-transform:uppercase;letter-spacing:.16em;color:var(--mut);
+}
+.body-lg{font-size:20px;line-height:1.6}
+.mut{color:var(--mut)}
+.tight{max-width:720px}
+.tight-sm{max-width:560px}
+
+/* gradient text — brand allows this on black only */
+.grad{
+  background:var(--grad-x);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.grad-y{background:var(--grad-y);-webkit-background-clip:text;background-clip:text;color:transparent}
+.t-mag{color:var(--magenta)}
+.t-cyan{color:var(--cyan)}
+.t-lav{color:var(--lav)}
+
+/* ---------------- layout ---------------- */
+.wrap{width:var(--wrap);margin:0 auto;position:relative;z-index:2}
+.sec{position:relative;padding:150px 0;overflow:hidden}
+.sec--tight{padding:110px 0}
+.sec--light{background:var(--white);color:var(--black)}
+.sec--light .label{color:var(--mut-lt)}
+.sec--light .mut{color:var(--mut-lt)}
+.row{display:flex;gap:80px;align-items:flex-start}
+.row--mid{align-items:center}
+.col{display:flex;flex-direction:column}
+.flex1{flex:1 1 0;min-width:1px}
+.stack-16>*+*{margin-top:16px}
+.stack-24>*+*{margin-top:24px}
+.stack-32>*+*{margin-top:32px}
+.stack-48>*+*{margin-top:48px}
+
+/* ---------------- atmosphere ---------------- */
+/* film grain over the whole page — the moodboard leans on this heavily */
+.grain{
+  position:fixed;inset:0;z-index:9;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* contour lines — concentric rings pushed through a turbulence
+   displacement map, which is what gives them their topographic wander */
+.contour{
+  position:absolute;inset:-25%;pointer-events:none;
+  filter:url(#warp);opacity:.42;
+  background:repeating-radial-gradient(circle at 50% 50%,
+    transparent 0 21px, currentColor 21px 22.5px);
+  color:rgba(255,0,255,.5);
+  animation:drift 46s linear infinite;
+  will-change:transform;
+}
+.contour--cyan{color:rgba(0,255,255,.42)}
+.contour--lav{color:rgba(127,128,255,.45)}
+.contour--ink{color:rgba(0,0,0,.16)}
+.contour--soft{opacity:.22}
+@keyframes drift{from{transform:translate3d(0,0,0)}to{transform:translate3d(-90px,-60px,0)}}
+
+/* glyph lattice — the mark's shell + diamond tiled, per brand p.19 */
+.lattice{position:absolute;inset:0;pointer-events:none;opacity:.5}
+.lattice--soft{opacity:.28}
+
+/* gradient orbs */
+.orb{position:absolute;border-radius:50%;pointer-events:none;filter:blur(70px);opacity:.55}
+.orb--mag{background:radial-gradient(circle at 35% 35%,#FF00FF,rgba(255,0,255,0) 68%)}
+.orb--cyan{background:radial-gradient(circle at 35% 35%,#00FFFF,rgba(0,255,255,0) 68%)}
+.orb--lav{background:radial-gradient(circle at 35% 35%,#7F80FF,rgba(127,128,255,0) 68%)}
+
+/* the hero sphere — echoes the "future." orb on the board */
+.sphere{
+  position:relative;width:460px;height:460px;border-radius:50%;flex:none;
+  background:
+    radial-gradient(circle at 32% 28%,rgba(255,255,255,.5) 0%,rgba(255,255,255,0) 30%),
+    radial-gradient(circle at 50% 50%,#1a0a2e 0%,#3d0b52 42%,#8F0080 68%,#FF00FF 84%,#00FFFF 100%);
+  box-shadow:0 0 120px rgba(255,0,255,.45),inset -40px -60px 120px rgba(0,0,0,.75);
+  animation:float 9s ease-in-out infinite;
+}
+.sphere::after{
+  content:"";position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle at 50% 118%,rgba(0,255,255,.55),rgba(0,255,255,0) 46%);
+}
+.sphere__glyph{position:absolute;inset:0;margin:auto;width:112px;height:112px;opacity:.92;z-index:2}
+@keyframes float{0%,100%{transform:translateY(-10px)}50%{transform:translateY(10px)}}
+
+/* ---------------- buttons ---------------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:15px 26px;border-radius:999px;border:1px solid transparent;
+  font-family:var(--body);font-weight:700;font-size:16px;line-height:1;
+  cursor:pointer;text-decoration:none;white-space:nowrap;
+  transition:transform .2s var(--ease),background-color .2s ease,color .2s ease,border-color .2s ease,box-shadow .2s ease;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn--grad{background:var(--grad-x);color:var(--black);box-shadow:0 6px 30px rgba(255,0,255,.3)}
+.btn--grad:hover{box-shadow:0 10px 40px rgba(255,0,255,.45)}
+.btn--ghost{border-color:rgba(255,255,255,.35);color:var(--white)}
+.btn--ghost:hover{border-color:var(--white);background:rgba(255,255,255,.08)}
+.btn--dark{background:var(--black);color:var(--white)}
+.btn--dark:hover{background:#1c1c1f}
+.btn--onlight{border-color:rgba(0,0,0,.3);color:var(--black)}
+.btn--onlight:hover{background:rgba(0,0,0,.06);border-color:var(--black)}
+.btns{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+
+/* ---------------- nav ---------------- */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:60;height:76px;
+  display:flex;align-items:center;justify-content:space-between;padding:0 40px;
+  background:rgba(6,6,8,.62);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+  border-bottom:1px solid var(--line);
+}
+.nav__brand{display:flex;align-items:center;background:none;border:0;padding:0;cursor:pointer}
+.nav__logo{width:150px;height:auto;color:var(--white)}
+.nav__links{display:flex;align-items:center;gap:2px}
+.nav__link{
+  padding:9px 15px;border-radius:999px;border:0;background:none;cursor:pointer;
+  font-size:15px;font-weight:500;color:var(--mut);white-space:nowrap;
+  transition:color .2s ease,background-color .2s ease;
+}
+.nav__link:hover{color:var(--white);background:rgba(255,255,255,.08)}
+.nav__link.is-active{color:var(--white);background:rgba(255,255,255,.12)}
+.nav__link.is-stub{opacity:.4;cursor:not-allowed}
+.nav__link.is-stub:hover{background:none;color:var(--mut)}
+.nav__cta{padding:12px 22px;font-size:15px}
+
+/* ---------------- footer ---------------- */
+.footer{position:relative;background:var(--black);border-top:1px solid var(--line);overflow:hidden}
+.footer__inner{padding:80px 0 40px;position:relative;z-index:2}
+.footer__top{display:flex;justify-content:space-between;align-items:flex-start;gap:80px}
+.footer__logo{width:190px;height:auto;color:var(--white)}
+.footer__cols{display:flex;gap:80px}
+.footer__col{display:flex;flex-direction:column;gap:12px}
+.footer__h{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.footer__col button,.footer__col a{
+  background:none;border:0;padding:0;text-align:left;cursor:pointer;text-decoration:none;
+  font-size:15px;color:rgba(255,255,255,.78);transition:color .2s ease;
+}
+.footer__col button:hover,.footer__col a:hover{color:var(--magenta)}
+.footer__rule{height:1px;background:var(--grad-x);opacity:.5;margin:56px 0 24px}
+.footer__base{display:flex;justify-content:space-between;font-size:13px;color:rgba(255,255,255,.42)}
+
+/* ---------------- section number (moodboard "01") ---------------- */
+.num{
+  font-family:var(--heading);font-weight:200;font-size:120px;line-height:.86;
+  letter-spacing:-.04em;
+  background:var(--grad-y);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.num--sm{font-size:84px}
+
+/* ---------------- cards ---------------- */
+.card{
+  position:relative;background:var(--surface-2);border:1px solid var(--line);
+  border-radius:20px;padding:32px;overflow:hidden;
+  transition:border-color .3s ease,transform .3s var(--ease);
+}
+.card:hover{border-color:rgba(255,255,255,.3);transform:translateY(-4px)}
+.card__glyph{width:44px;height:44px;margin-bottom:22px}
+.card h3{margin-bottom:10px}
+.cards{display:flex;gap:24px;align-items:stretch}
+.cards>.card{flex:1 1 0;min-width:1px}
+.card--light{background:#F6F7FB;border-color:var(--line-lt);color:var(--black)}
+.card--light:hover{border-color:rgba(0,0,0,.28)}
+
+/* accent panel — the bright block from the Mews / TARS references */
+.panel{
+  position:relative;border-radius:24px;padding:56px;overflow:hidden;color:var(--black);
+  background:var(--grad-x);
+}
+.panel--deep{background:var(--grad-deep);color:var(--white)}
+
+/* ---------------- stats ---------------- */
+.stats{display:flex;gap:0;border-top:1px solid var(--line)}
+.stat{
+  flex:1 1 0;min-width:1px;padding:40px 32px 40px 0;
+  border-bottom:1px solid var(--line);position:relative;
+}
+.stat+.stat{padding-left:32px;border-left:1px solid var(--line)}
+.stat__n{
+  font-family:var(--heading);font-weight:200;font-size:76px;line-height:1;letter-spacing:-.03em;
+  background:var(--grad-y);-webkit-background-clip:text;background-clip:text;color:transparent;
+  font-variant-numeric:tabular-nums;display:block;margin-bottom:14px;
+}
+.stat__l{font-size:15px;line-height:1.5;color:var(--mut)}
+
+/* ---------------- process steps ---------------- */
+.step{
+  display:flex;gap:56px;align-items:flex-start;
+  padding:44px 0;border-top:1px solid var(--line);
+  transition:background-color .3s ease;
+}
+.step:last-child{border-bottom:1px solid var(--line)}
+.step:hover{background:rgba(255,255,255,.02)}
+.step__n{
+  font-family:var(--heading);font-weight:200;font-size:72px;line-height:.9;letter-spacing:-.04em;
+  width:130px;flex:none;
+  background:var(--grad-y);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.step__b{flex:1 1 0;min-width:1px}
+.step__b h3{margin-bottom:8px}
+
+/* ---------------- timeline ---------------- */
+.tl{position:relative;padding-top:56px}
+.tl__rule{position:absolute;top:0;left:0;right:0;height:2px;background:var(--grad-x)}
+.tl__items{display:flex;gap:32px}
+.tl__i{flex:1 1 0;min-width:1px;position:relative}
+.tl__dot{position:absolute;top:-63px;left:0;width:20px;height:20px}
+.tl__d{font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin-bottom:10px}
+.tl__t{font-size:17px;line-height:1.5;font-weight:500}
+
+/* ---------------- people ---------------- */
+.people{display:flex;gap:24px}
+.person{flex:1 1 0;min-width:1px}
+.person__ph{
+  position:relative;width:100%;aspect-ratio:1;border-radius:20px;overflow:hidden;
+  background:var(--surface-2);border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;margin-bottom:18px;
+}
+.person__ring{
+  position:absolute;inset:0;background:var(--grad-angular);opacity:.5;
+  -webkit-mask:radial-gradient(circle at 50% 46%,transparent 0 33%,#000 34%);
+          mask:radial-gradient(circle at 50% 46%,transparent 0 33%,#000 34%);
+}
+.person__g{width:56px;height:56px;position:relative;z-index:2;opacity:.9}
+.person__n{font-weight:700;font-size:17px;line-height:1.4}
+.person__r{font-size:14px;color:var(--mut);margin-bottom:8px}
+.person__b{font-size:14px;line-height:1.6;color:var(--mut)}
+
+/* ---------------- logo plates ---------------- */
+.plates{display:flex;gap:20px}
+.plate{
+  flex:1 1 0;min-width:1px;height:104px;border-radius:16px;
+  border:1px solid var(--line-lt);background:#F6F7FB;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut-lt);
+}
+.plate--dark{background:var(--surface-2);border-color:var(--line);color:var(--mut)}
+
+/* ---------------- FAQ ---------------- */
+.faq{border-top:1px solid var(--line)}
+.faq:last-of-type{border-bottom:1px solid var(--line)}
+.faq__q{
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:40px;
+  padding:28px 0;background:none;border:0;cursor:pointer;text-align:left;
+  font-family:var(--body);font-weight:600;font-size:19px;line-height:1.45;color:var(--white);
+  transition:color .2s ease;
+}
+.faq__q:hover{color:var(--magenta)}
+.faq__s{position:relative;width:16px;height:16px;flex:none}
+.faq__s::before,.faq__s::after{
+  content:"";position:absolute;background:currentColor;transition:transform .3s var(--ease);
+}
+.faq__s::before{left:0;top:7px;width:16px;height:2px}
+.faq__s::after{left:7px;top:0;width:2px;height:16px}
+.faq.is-open .faq__s::after{transform:scaleY(0)}
+.faq__a{
+  display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s var(--ease);
+}
+.faq.is-open .faq__a{grid-template-rows:1fr}
+.faq__a>div{overflow:hidden}
+.faq__a p{padding-bottom:28px;max-width:900px;color:var(--mut)}
+
+/* ---------------- misc ---------------- */
+.rule-grad{height:2px;background:var(--grad-x);opacity:.7}
+.bullets li{display:flex;gap:12px;padding:10px 0;font-size:15px;line-height:1.6;color:var(--mut)}
+.bullets li::before{content:"";width:7px;height:7px;margin-top:9px;flex:none;background:var(--grad-x);transform:rotate(45deg)}
+
+/* soft light-section wash — the "We believe in the future" board */
+.wash{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.wash__blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.42}
+.grid-lt{
+  position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:linear-gradient(rgba(0,0,0,.055) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(0,0,0,.055) 1px,transparent 1px);
+  background-size:56px 56px;
+  -webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 50%,#000,transparent 78%);
+          mask-image:radial-gradient(ellipse 70% 60% at 50% 50%,#000,transparent 78%);
+}
+
+/* ---------------- scroll reveal ---------------- */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0ms)}
+.rv.is-in{opacity:1;transform:none}
+
+/* ---------------- routing / chrome ---------------- */
+.page{display:none}
+.page.is-active{display:block}
+main{padding-top:76px}
+.devbar{position:fixed;right:16px;bottom:16px;z-index:200;display:flex;gap:8px}
+.devbtn{
+  background:rgba(255,255,255,.12);color:#fff;border:1px solid var(--line);padding:8px 14px;
+  border-radius:999px;font-size:12px;line-height:18px;font-family:var(--body);text-decoration:none;
+  opacity:.4;cursor:pointer;transition:opacity .2s ease;
+}
+.devbtn:hover{opacity:1}
+html.is-preview .devbar{display:none}
+.toast{
+  position:fixed;left:50%;bottom:32px;transform:translateX(-50%) translateY(14px);
+  background:rgba(255,255,255,.1);border:1px solid var(--line);backdrop-filter:blur(20px);
+  color:#fff;padding:13px 22px;border-radius:999px;font-size:14px;
+  z-index:210;opacity:0;pointer-events:none;transition:opacity .25s ease,transform .25s ease;
+}
+.toast.is-on{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media (prefers-reduced-motion:reduce){
+  .contour,.sphere{animation:none}
+  .rv{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+<!-- ============ shared defs: gradients, glyph blocks, patterns ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <!-- pushes the concentric rings around into topographic contours -->
+    <filter id="warp" x="-20%" y="-20%" width="140%" height="140%">
+      <!-- 2 octaves keeps the noise field smooth, so the rings bend into
+           contours instead of fraying into static -->
+      <feTurbulence type="fractalNoise" baseFrequency="0.0035 0.006" numOctaves="2" seed="11" result="t"/>
+      <feDisplacementMap in="SourceGraphic" in2="t" scale="215" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+
+    <linearGradient id="gy" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#00FFFF"/><stop offset=".52" stop-color="#7F80FF"/><stop offset="1" stop-color="#FF00FF"/>
+    </linearGradient>
+    <linearGradient id="gx" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#00FFFF"/><stop offset=".5" stop-color="#7F80FF"/><stop offset="1" stop-color="#FF00FF"/>
+    </linearGradient>
+    <!-- angular, reserved for the logomark per brand p.14 -->
+    <linearGradient id="mark-a" x1="0" y1="0" x2="74.82" y2="75.28" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00FFFF"/><stop offset="1" stop-color="#FF00FF"/>
+    </linearGradient>
+    <linearGradient id="mark-b" x1="6.75" y1="6.98" x2="68.06" y2="68.29" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00FFFF"/><stop offset="1" stop-color="#FF00FF"/>
+    </linearGradient>
+
+    <!-- lattice built from the glyph's own building blocks (brand p.19) -->
+    <pattern id="lattice-mag" width="150" height="150" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <g fill="#FF00FF" opacity=".34">
+        <use href="#g-shell" x="31" y="31" width="88" height="88"/>
+        <use href="#g-diamond" x="-22" y="-22" width="44" height="44"/>
+        <use href="#g-diamond" x="128" y="-22" width="44" height="44"/>
+        <use href="#g-diamond" x="-22" y="128" width="44" height="44"/>
+        <use href="#g-diamond" x="128" y="128" width="44" height="44"/>
+      </g>
+    </pattern>
+    <pattern id="lattice-cyan" width="150" height="150" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <g fill="#00FFFF" opacity=".26">
+        <use href="#g-shell" x="31" y="31" width="88" height="88"/>
+        <use href="#g-diamond" x="-22" y="-22" width="44" height="44"/>
+        <use href="#g-diamond" x="128" y="-22" width="44" height="44"/>
+        <use href="#g-diamond" x="-22" y="128" width="44" height="44"/>
+        <use href="#g-diamond" x="128" y="128" width="44" height="44"/>
+      </g>
+    </pattern>
+  </defs>
+
+  <!-- the three building blocks: outer shell, diamond, dot -->
+  <symbol id="g-shell" viewBox="0 0 74.82 75.28">
+    <path fill="currentColor" d="M65.96 75.28H43.11L37.41 69.58L31.71 75.28H8.86L0 66.42V43.34L5.7 37.64L0 31.94V8.86L8.86 0H31.71L37.41 5.7L43.11 0H65.96L74.82 8.86V31.94L69.12 37.64L74.82 43.34V66.42L65.96 75.28ZM45.72 68.97H63.34L68.5 63.81V45.96L60.18 37.64L68.5 29.32V11.47L63.34 6.31H45.72L37.4 14.63L29.08 6.31H11.47L6.31 11.47V29.32L14.63 37.64L6.31 45.96V63.81L11.47 68.97H29.09L37.41 60.65L45.73 68.97H45.72Z"/>
+  </symbol>
+  <symbol id="g-diamond" viewBox="0 0 74.82 75.28">
+    <path fill="currentColor" d="M68.06 37.64L37.41 6.97998L6.74997 37.64L37.4 68.29L68.05 37.64L68.06 37.64ZM37.41 15.91L59.14 37.64L37.41 59.37L15.68 37.64L37.41 15.91Z"/>
+  </symbol>
+  <symbol id="g-dot" viewBox="0 0 74.82 75.28">
+    <path fill="currentColor" d="M37.4042 30.3918L30.1635 37.6326L37.4042 44.8733L44.645 37.6326L37.4042 30.3918Z"/>
+  </symbol>
+
+  <!-- full mark: shell + diamond in the angular gradient, dot takes the type colour -->
+  <symbol id="g-mark" viewBox="0 0 74.82 75.28">
+    <path fill="url(#mark-a)" d="M65.96 75.28H43.11L37.41 69.58L31.71 75.28H8.86L0 66.42V43.34L5.7 37.64L0 31.94V8.86L8.86 0H31.71L37.41 5.7L43.11 0H65.96L74.82 8.86V31.94L69.12 37.64L74.82 43.34V66.42L65.96 75.28ZM45.72 68.97H63.34L68.5 63.81V45.96L60.18 37.64L68.5 29.32V11.47L63.34 6.31H45.72L37.4 14.63L29.08 6.31H11.47L6.31 11.47V29.32L14.63 37.64L6.31 45.96V63.81L11.47 68.97H29.09L37.41 60.65L45.73 68.97H45.72Z"/>
+    <path fill="url(#mark-b)" d="M68.06 37.64L37.41 6.97998L6.74997 37.64L37.4 68.29L68.05 37.64L68.06 37.64ZM37.41 15.91L59.14 37.64L37.41 59.37L15.68 37.64L37.41 15.91Z"/>
+    <path fill="currentColor" d="M37.4042 30.3918L30.1635 37.6326L37.4042 44.8733L44.645 37.6326L37.4042 30.3918Z"/>
+  </symbol>
+
+  <!-- lockup: mark + wordmark, wordmark inherits currentColor -->
+  <symbol id="logo" viewBox="0 0 404 76">
+    <use href="#g-mark" width="74.82" height="75.28"/>
+    <g fill="currentColor">
+      <path d="M115.32 55.1401C112.05 55.1401 109.19 54.4601 106.74 53.1001C104.29 51.7401 102.38 49.8301 101.02 47.3801C99.66 44.9301 98.98 42.0501 98.98 38.7401C98.98 35.4301 99.66 32.5601 101.02 30.1301C102.38 27.7001 104.28 25.7901 106.71 24.4101C109.14 23.0301 111.99 22.3401 115.26 22.3401C118.53 22.3401 121.36 23.0301 123.75 24.4101C126.14 25.7901 127.98 27.7701 129.27 30.3301C130.55 32.9001 131.2 35.9501 131.2 39.4901V41.3601H109.37C109.49 43.5401 110.1 45.1601 111.21 46.2301C112.32 47.3001 113.75 47.8401 115.5 47.8401C116.82 47.8401 117.93 47.5801 118.83 47.0501C119.72 46.5301 120.37 45.6601 120.76 44.4501L130.8 45.0301C129.94 48.3001 128.13 50.8001 125.37 52.5301C122.61 54.2601 119.26 55.1301 115.33 55.1301L115.32 55.1401ZM109.37 35.6501H121.04C120.96 33.5901 120.4 32.0401 119.35 31.0101C118.3 29.9801 116.94 29.4601 115.26 29.4601C113.58 29.4601 112.33 30.0001 111.26 31.0901C110.19 32.1801 109.56 33.7001 109.36 35.6401L109.37 35.6501Z"/>
+      <path d="M145.32 54.44C142.52 54.44 140.34 53.74 138.78 52.34C137.22 50.94 136.45 48.66 136.45 45.51V13H146.49V44.4C146.49 45.41 146.72 46.13 147.19 46.56C147.66 46.99 148.32 47.2 149.17 47.2H151.1V54.44H145.32Z"/>
+      <path d="M165.05 55.1401C161.78 55.1401 159.1 54.3801 157 52.8601C154.9 51.3401 153.85 49.2401 153.85 46.5601C153.85 43.8801 154.74 41.6601 156.53 40.1401C158.32 38.6201 160.93 37.5101 164.35 36.8101L174.1 34.8301C174.1 33.0001 173.7 31.6101 172.9 30.6601C172.1 29.7101 170.96 29.2301 169.49 29.2301C168.02 29.2301 166.85 29.5901 166.02 30.3101C165.18 31.0301 164.65 32.0501 164.41 33.3701L154.37 33.0201C154.99 29.4001 156.61 26.7201 159.21 24.9701C161.82 23.2201 165.24 22.3401 169.48 22.3401C174.38 22.3401 178.05 23.4501 180.48 25.6701C182.91 27.8901 184.13 31.1901 184.13 35.5901V45.5101C184.13 46.4801 184.3 47.1201 184.63 47.4401C184.96 47.7601 185.42 47.9101 186 47.9101H186.76V54.4501C186.45 54.5701 185.94 54.6601 185.24 54.7401C184.54 54.8201 183.86 54.8601 183.2 54.8601C181.99 54.8601 180.83 54.6601 179.7 54.2501C178.57 53.8401 177.64 53.1001 176.9 52.0301C176.16 50.9601 175.79 49.4101 175.79 47.3901L176.55 48.1501C176.16 49.5501 175.47 50.7901 174.48 51.8601C173.49 52.9301 172.21 53.7501 170.66 54.3101C169.1 54.8701 167.24 55.1601 165.06 55.1601L165.05 55.1401ZM167.68 48.6101C168.92 48.6101 170.03 48.3601 171.01 47.8501C171.98 47.3401 172.74 46.6101 173.29 45.6301C173.83 44.6601 174.11 43.4501 174.11 42.0101V40.7301L168.04 42.1301C166.83 42.4001 165.89 42.8201 165.21 43.3901C164.53 43.9501 164.19 44.7001 164.19 45.6401C164.19 46.5801 164.48 47.3001 165.07 47.8301C165.65 48.3501 166.53 48.6201 167.7 48.6201L167.68 48.6101Z"/>
+      <path d="M191.02 54.44V23.04H200.65L201 32.55L200.24 32.43C200.78 29.08 201.7 26.68 202.98 25.22C204.26 23.76 206.05 23.03 208.35 23.03H211.09V31.14H208.29C206.62 31.14 205.25 31.34 204.2 31.72C203.15 32.11 202.36 32.74 201.84 33.62C201.31 34.5 201.05 35.69 201.05 37.21V54.43H191.01L191.02 54.44Z"/>
+      <path d="M224.46 55.1401C221.19 55.1401 218.51 54.3801 216.41 52.8601C214.31 51.3401 213.26 49.2401 213.26 46.5601C213.26 43.8801 214.16 41.6601 215.95 40.1401C217.74 38.6201 220.35 37.5101 223.77 36.8101L233.52 34.8301C233.52 33.0001 233.12 31.6101 232.32 30.6601C231.52 29.7101 230.38 29.2301 228.91 29.2301C227.44 29.2301 226.27 29.5901 225.44 30.3101C224.6 31.0301 224.07 32.0501 223.83 33.3701L213.79 33.0201C214.41 29.4001 216.03 26.7201 218.63 24.9701C221.24 23.2201 224.66 22.3401 228.9 22.3401C233.8 22.3401 237.47 23.4501 239.9 25.6701C242.33 27.8901 243.55 31.1901 243.55 35.5901V45.5101C243.55 46.4801 243.71 47.1201 244.05 47.4401C244.38 47.7501 244.84 47.9101 245.42 47.9101H246.18V54.4501C245.87 54.5701 245.36 54.6601 244.66 54.7401C243.96 54.8201 243.28 54.8601 242.62 54.8601C241.41 54.8601 240.25 54.6601 239.12 54.2501C237.99 53.8401 237.06 53.1001 236.32 52.0301C235.58 50.9601 235.21 49.4101 235.21 47.3901L235.97 48.1501C235.58 49.5501 234.89 50.7901 233.9 51.8601C232.91 52.9301 231.63 53.7501 230.08 54.3101C228.52 54.8701 226.65 55.1601 224.48 55.1601L224.46 55.1401ZM227.09 48.6101C228.34 48.6101 229.44 48.3601 230.42 47.8501C231.39 47.3401 232.15 46.6101 232.7 45.6301C233.24 44.6601 233.52 43.4501 233.52 42.0101V40.7301L227.45 42.1301C226.24 42.4001 225.3 42.8201 224.62 43.3901C223.94 43.9501 223.6 44.7001 223.6 45.6401C223.6 46.5801 223.89 47.3001 224.48 47.8301C225.06 48.3501 225.94 48.6201 227.11 48.6201L227.09 48.6101Z"/>
+      <path d="M262.28 55.1401C259.63 55.1401 257.4 54.7101 255.57 53.8601C253.74 53.0001 252.34 51.8401 251.37 50.3601C250.4 48.8801 249.85 47.2301 249.74 45.4001L251.55 45.1701C251.67 47.6201 252.64 49.6101 254.47 51.1201C256.3 52.6401 258.91 53.4001 262.29 53.4001C265.4 53.4001 267.75 52.8601 269.32 51.7701C270.9 50.6801 271.68 49.0801 271.68 46.9801C271.68 45.8501 271.47 44.8701 271.04 44.0301C270.61 43.1901 269.68 42.4501 268.24 41.8101C266.8 41.1701 264.56 40.5901 261.53 40.0901C258.65 39.5801 256.47 38.9701 254.99 38.2501C253.51 37.5301 252.52 36.6401 252.01 35.5601C251.5 34.4901 251.25 33.2001 251.25 31.6801C251.25 29.0001 252.21 26.8501 254.14 25.2301C256.07 23.6201 258.61 22.8101 261.76 22.8101C264.29 22.8101 266.36 23.2301 267.98 24.0701C269.6 24.9101 270.83 26.0201 271.69 27.4001C272.55 28.7801 273.11 30.3101 273.38 31.9801L271.57 32.3301C271.41 30.9701 271 29.6901 270.32 28.5101C269.64 27.3201 268.61 26.3701 267.23 25.6501C265.85 24.9301 264.03 24.5701 261.77 24.5701C259.16 24.5701 257.07 25.1801 255.5 26.4101C253.92 27.6401 253.14 29.4001 253.14 31.6901C253.14 33.0501 253.38 34.1601 253.87 35.0201C254.36 35.8801 255.26 36.5701 256.58 37.0901C257.9 37.6201 259.83 38.0901 262.36 38.5201C265.28 38.9901 267.55 39.5801 269.19 40.3001C270.82 41.0201 271.96 41.9201 272.6 42.9901C273.24 44.0601 273.56 45.3501 273.56 46.8701C273.56 49.5501 272.58 51.6101 270.61 53.0301C268.65 54.4501 265.87 55.1601 262.29 55.1601L262.28 55.1401Z"/>
+      <path d="M279.68 63.2001V23.5101H281.2L281.32 33.7201L280.8 33.4301C281.58 30.0401 283 27.4301 285.06 25.5801C287.12 23.7301 289.57 22.8101 292.41 22.8101C295.02 22.8101 297.26 23.4701 299.15 24.7901C301.04 26.1101 302.49 27.9801 303.53 30.3901C304.56 32.8001 305.08 35.6601 305.08 38.9701C305.08 42.2801 304.57 45.1401 303.56 47.5501C302.55 49.9601 301.1 51.8301 299.21 53.1501C297.32 54.4701 295.1 55.1301 292.53 55.1301C290.58 55.1301 288.8 54.6401 287.16 53.6701C285.53 52.7001 284.16 51.4301 283.08 49.8801C281.99 48.3201 281.31 46.6901 281.04 44.9801L281.45 44.3401V63.1901H279.7L279.68 63.2001ZM292.52 53.3901C295.83 53.3901 298.43 52.1001 300.34 49.5101C302.25 46.9201 303.2 43.4101 303.2 38.9801C303.2 34.5501 302.24 31.0301 300.31 28.4501C298.38 25.8601 295.75 24.5701 292.4 24.5701C290.26 24.5701 288.36 25.2001 286.71 26.4701C285.06 27.7301 283.76 29.4601 282.83 31.6401C281.9 33.8201 281.43 36.2701 281.43 38.9901C281.43 41.7101 281.9 44.1601 282.86 46.3401C283.81 48.5201 285.13 50.2401 286.8 51.5101C288.47 52.7701 290.38 53.4101 292.52 53.4101V53.3901Z"/>
+      <path d="M319.89 55.1401C316.93 55.1401 314.54 54.3801 312.71 52.8601C310.88 51.3401 309.97 49.3401 309.97 46.8501C309.97 44.5201 310.85 42.6401 312.62 41.2201C314.39 39.8001 316.64 38.8401 319.36 38.3301L331.79 36.0001C331.79 31.9501 331.02 29.0401 329.49 27.2501C327.95 25.4601 325.61 24.5701 322.46 24.5701C319.62 24.5701 317.34 25.2901 315.63 26.7301C313.92 28.1701 312.85 30.2101 312.42 32.8601L310.49 32.6901C311.03 29.5401 312.33 27.1101 314.37 25.3901C316.41 23.6801 319.11 22.8201 322.45 22.8201C326.03 22.8201 328.77 23.8501 330.68 25.9101C332.59 27.9701 333.54 31.1401 333.54 35.4201V48.6101C333.54 50.2801 333.78 51.3801 334.27 51.9101C334.76 52.4401 335.48 52.7001 336.46 52.7001H336.81V54.4501C336.65 54.4901 336.51 54.5101 336.37 54.5101H335.93C335.07 54.5101 334.32 54.3301 333.68 53.9601C333.04 53.5901 332.54 52.8901 332.19 51.8601C331.84 50.8301 331.66 49.3201 331.66 47.3401H332.01C331.5 48.7001 330.69 49.9901 329.56 51.1901C328.43 52.4001 327.04 53.3601 325.39 54.0801C323.74 54.8001 321.9 55.1601 319.87 55.1601L319.89 55.1401ZM320 53.3901C322.26 53.3901 324.27 52.9101 326.04 51.9601C327.81 51.0101 329.21 49.7101 330.24 48.0801C331.27 46.4501 331.79 44.6001 331.79 42.5401V37.7001L319.88 39.9801C317.43 40.4501 315.47 41.2301 314.02 42.3101C312.56 43.4001 311.83 44.8801 311.83 46.7501C311.83 48.8901 312.54 50.5301 313.96 51.6801C315.38 52.8301 317.39 53.4001 320 53.4001V53.3901Z"/>
+      <path d="M336.75 25.14V23.51H351.46V25.14H336.75ZM348.08 54.44C346.1 54.44 344.62 53.94 343.64 52.95C342.67 51.96 342.18 50.51 342.18 48.6V16.27H343.93V48.49C343.93 50.05 344.29 51.16 345.01 51.82C345.73 52.48 346.79 52.81 348.19 52.81H351.46V54.44H348.07H348.08Z"/>
+      <path d="M356.54 17.79V13.7H358.52V17.79H356.54ZM356.66 54.4399V23.51H358.41V54.4399H356.66Z"/>
+      <path d="M374.57 55.1401C371.61 55.1401 369.22 54.3801 367.39 52.8601C365.56 51.3401 364.65 49.3401 364.65 46.8501C364.65 44.5201 365.53 42.6401 367.31 41.2201C369.08 39.8001 371.33 38.8401 374.05 38.3301L386.48 36.0001C386.48 31.9501 385.71 29.0401 384.17 27.2501C382.63 25.4601 380.29 24.5701 377.14 24.5701C374.3 24.5701 372.02 25.2901 370.31 26.7301C368.6 28.1701 367.53 30.2101 367.1 32.8601L365.17 32.6901C365.71 29.5401 367.01 27.1101 369.05 25.3901C371.09 23.6801 373.79 22.8201 377.13 22.8201C380.71 22.8201 383.45 23.8501 385.36 25.9101C387.26 27.9701 388.22 31.1401 388.22 35.4201V48.6101C388.22 50.2801 388.46 51.3801 388.95 51.9101C389.44 52.4401 390.17 52.7001 391.14 52.7001H391.49V54.4501C391.33 54.4901 391.19 54.5101 391.05 54.5101H390.61C389.75 54.5101 389 54.3301 388.36 53.9601C387.72 53.5901 387.22 52.8901 386.87 51.8601C386.52 50.8301 386.35 49.3201 386.35 47.3401H386.7C386.19 48.7001 385.38 49.9901 384.25 51.1901C383.12 52.4001 381.73 53.3601 380.08 54.0801C378.43 54.8001 376.59 55.1601 374.57 55.1601V55.1401ZM374.69 53.3901C376.95 53.3901 378.96 52.9101 380.73 51.9601C382.5 51.0101 383.9 49.7101 384.93 48.0801C385.96 46.4501 386.48 44.6001 386.48 42.5401V37.7001L374.57 39.9801C372.12 40.4501 370.16 41.2301 368.7 42.3101C367.24 43.4001 366.51 44.8801 366.51 46.7501C366.51 48.8901 367.22 50.5301 368.64 51.6801C370.06 52.8301 372.07 53.4001 374.68 53.4001L374.69 53.3901Z"/>
+      <path d="M401.54 54.44C399.94 54.44 398.74 54.05 397.92 53.27C397.1 52.49 396.69 51.33 396.69 49.77V13H398.44V49.77C398.44 50.74 398.71 51.49 399.26 52.02C399.8 52.54 400.62 52.81 401.71 52.81H403.58V54.44H401.54Z"/>
+    </g>
+  </symbol>
+</svg>
+<header class="nav">
+  <button class="nav__brand" data-goto="home" aria-label="Elara Spatial home">
+    <svg class="nav__logo" viewBox="0 0 404 76"><use href="#logo"/></svg>
+  </button>
+  <nav class="nav__links">
+    <button class="nav__link" data-goto="home">Home</button>
+    <button class="nav__link" data-goto="whatitis">What It Is</button>
+    <button class="nav__link" data-goto="howitworks">How It Works</button>
+    <button class="nav__link" data-goto="ai">AI Responsibility</button>
+    <button class="nav__link" data-goto="company">Company</button>
+    <button class="nav__link" data-goto="blog">Blog</button>
+    <button class="nav__link" data-goto="contact">Contact</button>
+  </nav>
+  <button class="btn btn--grad nav__cta" data-cta>Request a Demo</button>
+</header>
+<main id="main">
+<!-- ================================ HOME ================================ -->
+<section class="page" id="page-home" data-page="home">
+
+  <!-- Hero -->
+  <div class="sec" style="padding:130px 0 140px">
+    <div class="contour"></div>
+    <div class="orb orb--mag" style="width:620px;height:620px;top:-180px;right:-120px"></div>
+    <div class="orb orb--cyan" style="width:460px;height:460px;bottom:-220px;left:-140px;opacity:.4"></div>
+    <div class="wrap row row--mid" style="gap:70px">
+      <div class="flex1 stack-32 rv">
+        <p class="label">Spatial intelligence for property claims</p>
+        <h1>Turn simple property photos into <span class="grad">objective truth.</span></h1>
+        <p class="body-lg mut tight">Every hour an adjuster spends ruling out unknowns is an hour a family waits for their home to be made whole again. Anyone with a smartphone can now harness state-of-the-art spatial intelligence.</p>
+        <div class="btns">
+          <button class="btn btn--grad" data-cta>Request a Demo</button>
+          <button class="btn btn--ghost" data-goto="howitworks">See How it Works</button>
+        </div>
+      </div>
+      <div class="rv" style="--d:160ms">
+        <div class="sphere">
+          <svg class="sphere__glyph" viewBox="0 0 74.82 75.28" style="color:#fff"><use href="#g-mark"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 01 — Overview -->
+  <div class="sec">
+    <div class="orb orb--lav" style="width:520px;height:520px;top:-140px;left:-200px;opacity:.32"></div>
+    <div class="wrap row" style="gap:90px">
+      <div style="flex:0 0 300px" class="rv">
+        <p class="num">01</p>
+        <p class="label" style="margin-top:20px">Overview</p>
+      </div>
+      <div class="flex1 stack-24 rv" style="--d:120ms">
+        <h2>Go from image to insight.</h2>
+        <p class="body-lg mut">Property claims still move at the speed of paperwork. Inspections take days, adjusters spend hours documenting rooms they can't see, and policyholders wait — days, weeks, sometimes months — for an estimate that could have taken an afternoon.</p>
+        <p class="mut">Our platform reconstructs the room in 3D, identifies materials and damage, and applies your carrier rules. The adjuster receives an estimate that is already filled out. Because they only have to review it, the process is faster, more consistent, and easier to audit.</p>
+        <div class="cards" style="margin-top:16px">
+          <div class="card">
+            <svg class="card__glyph" viewBox="0 0 74.82 75.28" style="color:var(--cyan)"><use href="#g-shell"/></svg>
+            <h3>Capture anywhere</h3>
+            <p class="mut" style="font-size:15px">No app to download, no hardware to buy. The flow runs in a mobile browser.</p>
+          </div>
+          <div class="card">
+            <svg class="card__glyph" viewBox="0 0 74.82 75.28" style="color:var(--lav)"><use href="#g-diamond"/></svg>
+            <h3>Reconstructed in 3D</h3>
+            <p class="mut" style="font-size:15px">Layout, dimensions and surfaces resolved without ever needing to be on site.</p>
+          </div>
+          <div class="card">
+            <svg class="card__glyph" viewBox="0 0 74.82 75.28" style="color:var(--magenta)"><use href="#g-dot"/></svg>
+            <h3>Audit-ready output</h3>
+            <p class="mut" style="font-size:15px">Every line item traces back to the image, measurement and rule that produced it.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="sec sec--tight">
+    <svg class="lattice lattice--soft"><rect width="100%" height="100%" fill="url(#lattice-cyan)"/></svg>
+    <div class="wrap">
+      <div class="rv" style="max-width:760px;margin-bottom:56px">
+        <p class="label" style="margin-bottom:20px">Supporting stats</p>
+        <h2>Data-driven technology. <span class="grad">Industry-proven results.</span></h2>
+      </div>
+      <div class="stats rv" style="--d:100ms">
+        <div class="stat"><span class="stat__n" data-count-to="50" data-suffix="%" data-delay="0">50%</span><p class="stat__l">More claims processed per adjuster</p></div>
+        <div class="stat"><span class="stat__n" data-count-to="40" data-suffix="%+" data-delay="110">40%+</span><p class="stat__l">Claim cycle time reduction</p></div>
+        <div class="stat"><span class="stat__n" data-count-to="80" data-suffix="%+" data-delay="220">80%+</span><p class="stat__l">Estimates returned without errors</p></div>
+        <div class="stat"><span class="stat__n" data-count-to="90" data-suffix="%+" data-delay="330">90%+</span><p class="stat__l">First-time photo capture success</p></div>
+      </div>
+      <p class="mut rv" style="font-size:14px;margin-top:24px">Results from production deployments with top-10 U.S. carriers.</p>
+    </div>
+  </div>
+
+  <!-- 02 — Responsible AI (light) -->
+  <div class="sec sec--light">
+    <div class="grid-lt"></div>
+    <div class="wash">
+      <div class="wash__blob" style="width:520px;height:520px;background:#FF00FF;top:-160px;right:60px"></div>
+      <div class="wash__blob" style="width:460px;height:460px;background:#00FFFF;bottom:-200px;left:-60px"></div>
+      <div class="wash__blob" style="width:380px;height:380px;background:#7F80FF;top:180px;left:38%;opacity:.3"></div>
+    </div>
+    <div class="wrap">
+      <div class="row" style="gap:90px">
+        <div style="flex:0 0 300px" class="rv">
+          <p class="num">02</p>
+          <p class="label" style="margin-top:20px">Responsible AI</p>
+        </div>
+        <div class="flex1 stack-24 rv" style="--d:120ms">
+          <h2 style="max-width:640px">Built to be trusted by adjusters, carriers, and regulators.</h2>
+          <p class="body-lg mut">AI is not a stand-in for human judgment. Our platform doesn't make coverage decisions or replace adjusters. It documents objective truth and helps adjusters work smarter, faster, and more accurately. Every estimate is reviewed by a human and grounded in carrier-specific guidelines.</p>
+          <div class="cards" style="margin-top:16px">
+            <div class="card card--light">
+              <h3 style="color:var(--cyan-d)">Computer vision</h3>
+              <p style="font-size:15px;color:var(--mut-lt)">Recognises rooms, materials and visible damage directly from photographs.</p>
+            </div>
+            <div class="card card--light">
+              <h3 style="color:var(--lav-d)">Generative models</h3>
+              <p style="font-size:15px;color:var(--mut-lt)">Rebuild the 3D view of a room from anonymised images — never the estimate itself.</p>
+            </div>
+            <div class="card card--light">
+              <h3 style="color:var(--magenta-d)">Human in the loop</h3>
+              <p style="font-size:15px;color:var(--mut-lt)">A trained QA professional reviews and approves every result before delivery.</p>
+            </div>
+          </div>
+          <p style="color:var(--mut-lt);font-size:15px">Privacy is built in at capture — all personally identifiable information is stripped before any photo enters our system.</p>
+          <div><button class="btn btn--onlight" data-goto="ai">Learn about our AI approach &rarr;</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Demo CTA -->
+  <div class="sec" data-cta-anchor>
+    <div class="wrap">
+      <div class="panel rv" style="text-align:center;padding:88px 56px">
+        <div class="contour contour--ink" style="opacity:.3"></div>
+        <div style="position:relative;z-index:2">
+          <h2 style="max-width:820px;margin:0 auto 18px">Ready to process claims at the speed of life?</h2>
+          <p style="max-width:620px;margin:0 auto 32px;opacity:.8">See how Elara Spatial fits seamlessly into your adjusters' workflows.</p>
+          <button class="btn btn--dark" data-goto="contact">Request a Demo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="sec sec--tight">
+    <div class="wrap row" style="gap:90px;align-items:flex-start">
+      <div style="flex:0 0 320px" class="rv">
+        <h2>Frequently asked questions</h2>
+      </div>
+      <div class="flex1 rv" style="--d:120ms">
+        <div class="faq">
+          <button class="faq__q">What does Elara Spatial actually do?<span class="faq__s"></span></button>
+          <div class="faq__a"><div><p>We turn property photos into audit-ready documentation of property damage. A policyholder, adjuster, or contractor takes photos of a damaged room with their phone. Our platform reconstructs the room, identifies materials and damage, applies your carrier's pricing rules, and returns an Xactimate-ready estimate — typically in a couple of hours.</p></div></div>
+        </div>
+        <div class="faq">
+          <button class="faq__q">Who uses it?<span class="faq__s"></span></button>
+          <div class="faq__a"><div><p>Insurance adjusters and policyholders. The product is currently white-labeled by carriers, so policyholders interact with a flow branded by their insurance company — not by us.</p></div></div>
+        </div>
+        <div class="faq">
+          <button class="faq__q">What kinds of claims does it handle today?<span class="faq__s"></span></button>
+          <div class="faq__a"><div><p>Interior water damage — the most common peril in property insurance. Other perils are on our roadmap.</p></div></div>
+        </div>
+        <div class="faq">
+          <button class="faq__q">Does AI make the final call on estimates?<span class="faq__s"></span></button>
+          <div class="faq__a"><div><p>No. Every estimate is reviewed and approved by a human adjuster before it's finalized. Think of AI as the intelligent assistant that handles the photography, documentation, and preliminary estimate writing, enabling adjusters to focus on coverage and payment decisions.</p></div></div>
+        </div>
+        <div class="faq">
+          <button class="faq__q">How fast is it really?<span class="faq__s"></span></button>
+          <div class="faq__a"><div><p>Because our QA team reviews every result, it takes a couple of hours from photo capture to estimate. That's dramatically faster than the industry average of 28 days.</p></div></div>
+        </div>
+        <div class="faq">
+          <button class="faq__q">Do policyholders need to download an app?<span class="faq__s"></span></button>
+          <div class="faq__a"><div><p>No. The entire capture process runs in a mobile browser, and over 90% of first-time users complete it on the first try.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ============================ HOW IT WORKS ============================ -->
+<section class="page" id="page-howitworks" data-page="howitworks">
+
+  <div class="sec" style="padding:130px 0 110px">
+    <div class="contour contour--cyan"></div>
+    <div class="orb orb--cyan" style="width:560px;height:560px;top:-200px;right:-100px;opacity:.4"></div>
+    <div class="wrap row row--mid" style="gap:80px">
+      <div class="flex1 stack-32 rv">
+        <p class="label">How it works</p>
+        <h1><span class="grad">Five steps</span> from photo to estimate.</h1>
+        <p class="body-lg mut tight">Purpose-built to slot into the workflow your team already runs. Here's exactly what happens between the first photo and the finished estimate.</p>
+      </div>
+      <div class="rv" style="--d:140ms;flex:0 0 300px;display:flex;justify-content:center">
+        <svg viewBox="0 0 74.82 75.28" style="width:230px;color:rgba(255,255,255,.9)"><use href="#g-mark"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- The five steps -->
+  <div class="sec sec--tight" style="padding-top:0">
+    <div class="wrap">
+      <div class="rv" style="margin-bottom:48px">
+        <h2>The process</h2>
+        <p class="mut" style="max-width:640px;margin-top:14px">The output is audit-ready damage documentation that your adjusters review, edit and approve. The intelligence is AI. The judgment is yours.</p>
+      </div>
+
+      <div class="step rv">
+        <p class="step__n">01</p>
+        <div class="step__b">
+          <h3>Capture</h3>
+          <p class="mut">A policyholder, adjuster or contractor takes photos of the damaged space with a standard smartphone — no app download needed. The flow runs in a mobile browser and walks the user through every angle. Over 90% of first-time users complete the capture successfully on their first try.</p>
+        </div>
+      </div>
+      <div class="step rv" style="--d:80ms">
+        <p class="step__n">02</p>
+        <div class="step__b">
+          <h3>Privacy filter</h3>
+          <p class="mut">Before anything else, an automated privacy filter removes personally identifiable information — faces, family photos, documents, screens, license plates. Everyone working with the images sees only anonymised data.</p>
+        </div>
+      </div>
+      <div class="step rv" style="--d:160ms">
+        <p class="step__n">03</p>
+        <div class="step__b">
+          <h3>3D reconstruction</h3>
+          <p class="mut">A generative model rebuilds the room in 3D from the anonymised photos. Adjusters can understand layout, dimensions and surfaces — often without ever needing to be on site.</p>
+        </div>
+      </div>
+      <div class="step rv" style="--d:240ms">
+        <p class="step__n">04</p>
+        <div class="step__b">
+          <h3>Damage and material identification</h3>
+          <p class="mut">Computer vision identifies rooms, objects, materials and visible damage. The system generates a complete floor plan with everything labelled and measured.</p>
+        </div>
+      </div>
+      <div class="step rv" style="--d:320ms">
+        <p class="step__n">05</p>
+        <div class="step__b">
+          <h3>Rules-based estimate</h3>
+          <p class="mut">A traditional, rules-based estimation engine applies carrier guidelines, rates and coverage rules to produce a detailed line-item estimate. The estimate, floor plan and supporting documentation are then QA'd by a human before delivery.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ease of deployment (light) -->
+  <div class="sec sec--light">
+    <div class="grid-lt"></div>
+    <div class="wash">
+      <div class="wash__blob" style="width:480px;height:480px;background:#00FFFF;top:-140px;left:-80px"></div>
+      <div class="wash__blob" style="width:420px;height:420px;background:#7F80FF;bottom:-180px;right:10%"></div>
+    </div>
+    <div class="wrap row" style="gap:90px">
+      <div style="flex:0 0 300px" class="rv">
+        <p class="num">01</p>
+        <p class="label" style="margin-top:20px">Deployment</p>
+      </div>
+      <div class="flex1 stack-24 rv" style="--d:120ms">
+        <h2 style="max-width:600px">Flexible deployment anywhere in the workflow.</h2>
+        <p class="body-lg" style="color:var(--mut-lt)">We don't dictate how you process claims. The capture can be performed by anyone — a policyholder at FNOL, a mitigation technician, a field or desk adjuster, a contractor, or an inspector with no prior adjusting experience.</p>
+        <p style="color:var(--mut-lt)">Estimate quality stays consistent regardless of who's holding the phone. That means you can free up your most experienced adjusters for QA and complex claims, where their judgment actually moves the needle.</p>
+        <ul class="bullets" style="margin-top:8px">
+          <li style="color:var(--mut-lt)">Policyholder at FNOL — a link, a walkthrough, done</li>
+          <li style="color:var(--mut-lt)">Mitigation technician — scope and pre-existing conditions on record</li>
+          <li style="color:var(--mut-lt)">Field adjuster — minutes on site instead of hours</li>
+          <li style="color:var(--mut-lt)">Desk adjuster — the whole claim without leaving the desk</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ease of adoption -->
+  <div class="sec sec--tight">
+    <svg class="lattice lattice--soft"><rect width="100%" height="100%" fill="url(#lattice-mag)"/></svg>
+    <div class="wrap">
+      <div class="rv" style="max-width:700px;margin-bottom:48px">
+        <p class="label" style="margin-bottom:20px">Adoption</p>
+        <h2>No new systems. <span class="grad">No long training sessions.</span></h2>
+      </div>
+      <div class="cards rv" style="--d:100ms">
+        <div class="card">
+          <svg class="card__glyph" viewBox="0 0 74.82 75.28" style="color:var(--cyan)"><use href="#g-dot"/></svg>
+          <h3>1 hour adjuster training</h3>
+          <p class="mut" style="font-size:15px">Not a week. Not a month. One hour.</p>
+        </div>
+        <div class="card">
+          <svg class="card__glyph" viewBox="0 0 74.82 75.28" style="color:var(--lav)"><use href="#g-diamond"/></svg>
+          <h3>Native Xactimate integration</h3>
+          <p class="mut" style="font-size:15px">There's no new system to deploy or maintain.</p>
+        </div>
+        <div class="card">
+          <svg class="card__glyph" viewBox="0 0 74.82 75.28" style="color:var(--magenta)"><use href="#g-shell"/></svg>
+          <h3>Full customer support</h3>
+          <p class="mut" style="font-size:15px">Onboarding, training and ongoing support are included.</p>
+        </div>
+        <div class="card">
+          <svg class="card__glyph" viewBox="0 0 74.82 75.28" style="color:var(--cyan)"><use href="#g-mark"/></svg>
+          <h3>Metrics tracking built in</h3>
+          <p class="mut" style="font-size:15px">Usage, cycle time and pass-through rates prove ROI from day one.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Integrations -->
+  <div class="sec sec--tight">
+    <div class="wrap row" style="gap:90px;align-items:flex-start">
+      <div style="flex:0 0 300px" class="rv">
+        <p class="num num--sm">02</p>
+        <p class="label" style="margin-top:20px">Integrations</p>
+      </div>
+      <div class="flex1 stack-24 rv" style="--d:120ms">
+        <h2 style="max-width:560px">Integrated into the tools the industry already uses.</h2>
+        <p class="body-lg mut">We work natively with Xactimate and XactAnalysis to deliver both measurements and damage estimates. If your stack runs Verisk products, you don't need to add any new tools — it's already there.</p>
+        <div class="plates" style="margin-top:8px">
+          <div class="plate plate--dark">Xactimate</div>
+          <div class="plate plate--dark">XactAnalysis</div>
+          <div class="plate plate--dark">Cotality</div>
+        </div>
+        <p class="mut" style="font-size:15px">Cotality is supported for measurements only.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pricing -->
+  <div class="sec sec--tight">
+    <div class="wrap">
+      <div class="panel panel--deep rv" style="padding:64px">
+        <div class="contour contour--cyan" style="opacity:.18"></div>
+        <div class="row row--mid" style="position:relative;z-index:2;gap:80px">
+          <div class="flex1">
+            <p class="label" style="margin-bottom:18px">Pricing</p>
+            <h2 style="max-width:460px">Transparent, volume-based pricing.</h2>
+          </div>
+          <div class="flex1 stack-24">
+            <p class="body-lg" style="opacity:.85">Priced by claim volume, with terms aligned to your usage and goals. We're competitive against third-party adjusting firms — and we're end-to-end: capture, measurement and estimate in one workflow.</p>
+            <div><button class="btn btn--grad" data-cta>Request Pricing</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="sec sec--tight" data-cta-anchor>
+    <div class="wrap">
+      <div class="panel rv" style="text-align:center;padding:88px 56px">
+        <div class="contour contour--ink" style="opacity:.3"></div>
+        <div style="position:relative;z-index:2">
+          <h2 style="max-width:760px;margin:0 auto 18px">Want to see it run on a real claim?</h2>
+          <p style="max-width:620px;margin:0 auto 32px;opacity:.8">Bring us one of yours — we'll show you exactly what comes back, and how it slots into the way you work today.</p>
+          <button class="btn btn--dark" data-goto="contact">Request a Demo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="sec sec--tight">
+    <div class="wrap row" style="gap:90px;align-items:flex-start">
+      <div style="flex:0 0 320px" class="rv"><h2>Frequently asked questions</h2></div>
+      <div class="flex1 rv" style="--d:120ms">
+        <div class="faq">
+          <button class="faq__q">Is it possible to route claims automatically?<span class="faq__s"></span></button>
+          <div class="faq__a"><div><p>Yes, though it depends on your systems and configuration. We'll work with your teams to figure out the right approach.</p></div></div>
+        </div>
+        <div class="faq">
+          <button class="faq__q">How do we know which workflow is best?<span class="faq__s"></span></button>
+          <div class="faq__a"><div><p>Our solution adapts to almost any workflow. The right one for you is whichever delivers the most lift on the metrics you're trying to improve. We spend time with your team to figure that out before you commit.</p></div></div>
+        </div>
+        <div class="faq">
+          <button class="faq__q">Why can't it deliver results instantly?<span class="faq__s"></span></button>
+          <div class="faq__a"><div><p>Because humans review every estimate. That QA step is what makes our outputs trustworthy and audit-ready — and it takes time. We're working to reduce that time without compromising quality.</p></div></div>
+        </div>
+        <div class="faq">
+          <button class="faq__q">Do you support catastrophe response?<span class="faq__s"></span></button>
+          <div class="faq__a"><div><p>Yes. During CAT events we extend hours and process every day of the week. We can run out of capacity the same way carriers do during peak demand, but we pull through backlogs faster than most alternatives.</p></div></div>
+        </div>
+        <div class="faq">
+          <button class="faq__q">Do you have SOC-II?<span class="faq__s"></span></button>
+          <div class="faq__a"><div><p>Yes — SOC-II Type II certified. Our Vendor Security Package is available under NDA.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- =============================== COMPANY =============================== -->
+<section class="page" id="page-company" data-page="company">
+
+  <div class="sec" style="padding:130px 0 110px">
+    <div class="contour contour--lav"></div>
+    <div class="orb orb--lav" style="width:600px;height:600px;top:-200px;left:-160px;opacity:.4"></div>
+    <div class="orb orb--mag" style="width:420px;height:420px;bottom:-200px;right:-100px;opacity:.3"></div>
+    <div class="wrap">
+      <div class="rv stack-32" style="max-width:960px">
+        <p class="label">Company</p>
+        <h1>It all started with a simple question: why is it still so hard to know <span class="grad">what's really inside a building?</span></h1>
+      </div>
+      <div class="row rv" style="--d:140ms;gap:80px;margin-top:56px">
+        <p class="flex1 mut">The property world has lived with this problem for decades. There's a gap between what's physically there and the damage that can actually be seen, measured, documented, and acted on. Elara Spatial was founded by an architect trained in computer vision at MIT and a team of technologists from Silicon Valley and the construction industry, specifically to solve it.</p>
+        <p class="flex1 mut">The insurance industry wastes billions of dollars a year in inspection time, inconsistent estimates, and disputes that drag on long after a homeowner needs an answer. Adjusters risk losing their time, energy and — far too often — policyholders' trust. We've set our sights on interior property damage, where the largest information gaps are.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Timeline -->
+  <div class="sec sec--tight" style="padding-top:0">
+    <div class="wrap">
+      <div class="tl rv">
+        <div class="tl__rule"></div>
+        <div class="tl__items">
+          <div class="tl__i">
+            <svg class="tl__dot" viewBox="0 0 74.82 75.28" style="color:var(--cyan)"><use href="#g-diamond"/></svg>
+            <p class="tl__d">Jan 2024</p>
+            <p class="tl__t">First product launched as a prototype</p>
+          </div>
+          <div class="tl__i">
+            <svg class="tl__dot" viewBox="0 0 74.82 75.28" style="color:var(--lav)"><use href="#g-diamond"/></svg>
+            <p class="tl__d">Early 2025</p>
+            <p class="tl__t">Prototype customers renewed and increased consumption</p>
+          </div>
+          <div class="tl__i">
+            <svg class="tl__dot" viewBox="0 0 74.82 75.28" style="color:var(--lav)"><use href="#g-diamond"/></svg>
+            <p class="tl__d">Late 2025</p>
+            <p class="tl__t">First production deployment inside a top-10 carrier</p>
+          </div>
+          <div class="tl__i">
+            <svg class="tl__dot" viewBox="0 0 74.82 75.28" style="color:var(--magenta)"><use href="#g-diamond"/></svg>
+            <p class="tl__d">Early 2026</p>
+            <p class="tl__t">Running pilots with new carriers</p>
+          </div>
+        </div>
+      </div>
+      <p class="mut rv" style="max-width:720px;margin-top:64px">
+        Our name reflects the core of what we do. <em>Elara</em>, one of Jupiter's 95 moons, is a quiet satellite orbiting something large and complex. Just as the vastness of space holds an untold number of possibilities, Elara Spatial is focused on redefining what's possible. Our first exploration? Discovering what the claims process could look like when AI is embedded in it.
+      </p>
+    </div>
+  </div>
+
+  <!-- Values -->
+  <div class="sec">
+    <svg class="lattice lattice--soft"><rect width="100%" height="100%" fill="url(#lattice-mag)"/></svg>
+    <div class="wrap">
+      <div class="row" style="gap:90px;align-items:flex-start">
+        <div style="flex:0 0 300px" class="rv">
+          <p class="num">01</p>
+          <p class="label" style="margin-top:20px">Our values</p>
+        </div>
+        <div class="flex1 rv" style="--d:120ms">
+          <h2 style="max-width:520px;margin-bottom:40px">The values we never compromise on.</h2>
+          <div class="cards" style="flex-wrap:wrap;gap:20px">
+            <div class="card" style="flex:1 1 300px">
+              <svg class="card__glyph" viewBox="0 0 74.82 75.28" style="color:var(--cyan)"><use href="#g-diamond"/></svg>
+              <h3>Raise the Bar</h3>
+              <p class="mut" style="font-size:15px">Customers deserve excellence, and we deliver it by challenging industry norms before they challenge us. Every achievement isn't the end — it's a new place to start.</p>
+            </div>
+            <div class="card" style="flex:1 1 300px">
+              <svg class="card__glyph" viewBox="0 0 74.82 75.28" style="color:var(--lav)"><use href="#g-shell"/></svg>
+              <h3>Move Fast and Together</h3>
+              <p class="mut" style="font-size:15px">Speed means nothing if the resolution customers get isn't the one they need. We're focused on keeping our team, technology and partners aligned.</p>
+            </div>
+            <div class="card" style="flex:1 1 300px">
+              <svg class="card__glyph" viewBox="0 0 74.82 75.28" style="color:var(--magenta)"><use href="#g-dot"/></svg>
+              <h3>Engineer for Equity</h3>
+              <p class="mut" style="font-size:15px">Innovation without trust is an expensive liability. Our technology is built to be explainable to policyholders and consistent on outcomes, without the bias of human judgment.</p>
+            </div>
+            <div class="card" style="flex:1 1 300px">
+              <svg class="card__glyph" viewBox="0 0 74.82 75.28" style="color:var(--lav)"><use href="#g-diamond"/></svg>
+              <h3>Own the Outcome</h3>
+              <p class="mut" style="font-size:15px">Every decision has a ripple effect. There's a homeowner, an adjuster and a carrier affected by our choices. We don't check off a box — we take responsibility for the result.</p>
+            </div>
+            <div class="card" style="flex:1 1 300px">
+              <svg class="card__glyph" viewBox="0 0 74.82 75.28" style="color:var(--cyan)"><use href="#g-mark"/></svg>
+              <h3>Fuel the Humans</h3>
+              <p class="mut" style="font-size:15px">AI should empower people, not replace them. Our technology and culture are built on radical empathy, prioritising the well-being of our team, partners and customers.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Leadership (light) -->
+  <div class="sec sec--light">
+    <div class="grid-lt"></div>
+    <div class="wash">
+      <div class="wash__blob" style="width:520px;height:520px;background:#7F80FF;top:-180px;right:-60px"></div>
+      <div class="wash__blob" style="width:420px;height:420px;background:#00FFFF;bottom:-160px;left:8%"></div>
+    </div>
+    <div class="wrap">
+      <div class="rv" style="max-width:720px;margin-bottom:56px">
+        <p class="label" style="margin-bottom:20px">Leadership</p>
+        <h2>Deep domain knowledge. Vast tech expertise.</h2>
+      </div>
+      <div class="people rv" style="--d:100ms">
+        <div class="person">
+          <div class="person__ph" style="background:#F6F7FB;border-color:var(--line-lt)">
+            <div class="person__ring"></div>
+            <svg class="person__g" viewBox="0 0 74.82 75.28" style="color:var(--lav-d)"><use href="#g-shell"/></svg>
+          </div>
+          <p class="person__n">Ingrid Flores</p>
+          <p class="person__r" style="color:var(--mut-lt)">Chief Executive Officer</p>
+          <p class="person__b" style="color:var(--mut-lt)">20+ years in tech and strategy. Leadership roles at Meta, Airbnb and LinkedIn.</p>
+        </div>
+        <div class="person">
+          <div class="person__ph" style="background:#F6F7FB;border-color:var(--line-lt)">
+            <div class="person__ring"></div>
+            <svg class="person__g" viewBox="0 0 74.82 75.28" style="color:var(--cyan-d)"><use href="#g-diamond"/></svg>
+          </div>
+          <p class="person__n">Rachelle Villalon</p>
+          <p class="person__r" style="color:var(--mut-lt)">Founder &amp; Strategic Advisor</p>
+          <p class="person__b" style="color:var(--mut-lt)">20+ years in architecture and construction. MIT PhD.</p>
+        </div>
+        <div class="person">
+          <div class="person__ph" style="background:#F6F7FB;border-color:var(--line-lt)">
+            <div class="person__ring"></div>
+            <svg class="person__g" viewBox="0 0 74.82 75.28" style="color:var(--magenta-d)"><use href="#g-dot"/></svg>
+          </div>
+          <p class="person__n">Bruce Alde</p>
+          <p class="person__r" style="color:var(--mut-lt)">Chief Operating Officer</p>
+          <p class="person__b" style="color:var(--mut-lt)">20+ years in big-tech operations. Previously Google, Airbnb, HP and GE.</p>
+        </div>
+        <div class="person">
+          <div class="person__ph" style="background:#F6F7FB;border-color:var(--line-lt)">
+            <div class="person__ring"></div>
+            <svg class="person__g" viewBox="0 0 74.82 75.28" style="color:var(--lav-d)"><use href="#g-diamond"/></svg>
+          </div>
+          <p class="person__n">Daria Marmer</p>
+          <p class="person__r" style="color:var(--mut-lt)">Chief Product Officer</p>
+          <p class="person__b" style="color:var(--mut-lt)">15+ years in product. Previously eBay, LinkedIn, HubSpot and Klaviyo.</p>
+        </div>
+        <div class="person">
+          <div class="person__ph" style="background:#F6F7FB;border-color:var(--line-lt)">
+            <div class="person__ring"></div>
+            <svg class="person__g" viewBox="0 0 74.82 75.28" style="color:var(--cyan-d)"><use href="#g-shell"/></svg>
+          </div>
+          <p class="person__n">Mica Ari-Nachimson</p>
+          <p class="person__r" style="color:var(--mut-lt)">Chief Technical Officer</p>
+          <p class="person__b" style="color:var(--mut-lt)">6+ years in spatial AI, deep learning and robotics. Previously Pashoot Robotics and Reality Defender.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Investors -->
+  <div class="sec sec--tight">
+    <div class="wrap row" style="gap:90px;align-items:flex-start">
+      <div style="flex:0 0 300px" class="rv">
+        <p class="num num--sm">02</p>
+        <p class="label" style="margin-top:20px">Investors</p>
+      </div>
+      <div class="flex1 stack-24 rv" style="--d:120ms">
+        <h2 style="max-width:560px">Backed by professionals who understand AI and insurance.</h2>
+        <p class="body-lg mut">Elara Spatial is backed by a group of strategic partners and operators with deep experience across AI, property and insurance. We've raised capital from people who do more than write cheques — they help us build.</p>
+        <div class="plates" style="margin-top:8px">
+          <div class="plate plate--dark">Investor 1</div>
+          <div class="plate plate--dark">Investor 2</div>
+          <div class="plate plate--dark">Investor 3</div>
+          <div class="plate plate--dark">Partners</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Careers -->
+  <div class="sec sec--tight" data-cta-anchor>
+    <div class="wrap">
+      <div class="panel rv" style="text-align:center;padding:88px 56px;background:linear-gradient(90deg,#7F80FF 0%,#00FFFF 100%)">
+        <div class="contour contour--ink" style="opacity:.26"></div>
+        <div style="position:relative;z-index:2">
+          <p class="label" style="color:rgba(0,0,0,.6);margin-bottom:18px">Careers</p>
+          <h2 style="max-width:820px;margin:0 auto 18px">Work with us to change how the world interacts with the built environment.</h2>
+          <p style="max-width:640px;margin:0 auto 32px;opacity:.75">If you want to work on hard problems alongside people who care about doing them right, we'd like to hear from you.</p>
+          <button class="btn btn--dark">View Open Roles &rarr;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--PAGES-->
+</main>
+<footer class="footer">
+  <div class="contour contour--soft" style="opacity:.14"></div>
+  <div class="wrap footer__inner">
+    <div class="footer__top">
+      <div>
+        <svg class="footer__logo" viewBox="0 0 404 76"><use href="#logo"/></svg>
+        <p class="mut" style="max-width:340px;margin-top:20px;font-size:15px">
+          Spatial intelligence that turns property photos into audit-ready documentation.
+        </p>
+      </div>
+      <div class="footer__cols">
+        <div class="footer__col">
+          <p class="footer__h">Product</p>
+          <button data-goto="whatitis">What It Is</button>
+          <button data-goto="howitworks">How It Works</button>
+          <button data-goto="ai">AI Responsibility</button>
+        </div>
+        <div class="footer__col">
+          <p class="footer__h">Company</p>
+          <button data-goto="company">Company</button>
+          <button data-goto="blog">Blog</button>
+          <button data-goto="contact">Contact</button>
+        </div>
+        <div class="footer__col">
+          <p class="footer__h">Contact</p>
+          <a href="mailto:hello@elaraspatial.com">hello@elaraspatial.com</a>
+          <a href="mailto:sales@elaraspatial.com">sales@elaraspatial.com</a>
+          <a href="mailto:press@elaraspatial.com">press@elaraspatial.com</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__rule"></div>
+    <div class="footer__base">
+      <span>© 2026 Elara Spatial. All rights reserved.</span>
+      <span>Privacy Policy &nbsp;·&nbsp; Terms</span>
+    </div>
+  </div>
+</footer>
+
+<div class="devbar"><a class="devbtn" href="index.html">&#8592; All iterations</a></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(function () {
+  'use strict';
+
+  var BUILT  = ['home', 'howitworks', 'company'];
+  var TITLES = {
+    home:       'Elara Spatial — Turn simple property photos into objective truth',
+    howitworks: 'How It Works — Elara Spatial',
+    company:    'Company — Elara Spatial'
+  };
+
+  var pages    = Array.prototype.slice.call(document.querySelectorAll('.page'));
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav__link'));
+  var toastEl  = document.getElementById('toast');
+  var reduced  = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var toastT;
+
+  function toast(msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.add('is-on');
+    clearTimeout(toastT);
+    toastT = setTimeout(function () { toastEl.classList.remove('is-on'); }, 3400);
+  }
+
+  /* ---------------- routing ---------------- */
+  function go(name, push) {
+    if (BUILT.indexOf(name) === -1) {
+      toast('Only Home, How It Works and Company are built in this cut.');
+      return;
+    }
+    pages.forEach(function (p) { p.classList.toggle('is-active', p.dataset.page === name); });
+    navLinks.forEach(function (l) { l.classList.toggle('is-active', l.dataset.goto === name); });
+    if (push !== false && location.hash !== '#' + name) history.pushState(null, '', '#' + name);
+    document.title = TITLES[name];
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    closeFaqs();
+    arm(name);
+  }
+
+  navLinks.forEach(function (l) {
+    if (BUILT.indexOf(l.dataset.goto) === -1) {
+      l.classList.add('is-stub');
+      l.title = 'Not built in this iteration';
+    }
+  });
+
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest('[data-goto]');
+    if (t) { e.preventDefault(); go(t.dataset.goto); return; }
+
+    /* "Request a Demo" in the nav jumps to the CTA band on the current page */
+    var c = e.target.closest('[data-cta]');
+    if (c) {
+      e.preventDefault();
+      var active = document.querySelector('.page.is-active');
+      var anchor = active && active.querySelector('[data-cta-anchor]');
+      if (anchor) anchor.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
+    }
+  });
+
+  window.addEventListener('popstate', function () {
+    var h = (location.hash || '#home').slice(1);
+    go(BUILT.indexOf(h) === -1 ? 'home' : h, false);
+  });
+
+  /* ---------------- FAQ ---------------- */
+  var faqs = Array.prototype.slice.call(document.querySelectorAll('.faq'));
+  function closeFaqs() {
+    faqs.forEach(function (f) {
+      f.classList.remove('is-open');
+      f.querySelector('.faq__q').setAttribute('aria-expanded', 'false');
+    });
+  }
+  faqs.forEach(function (f) {
+    var q = f.querySelector('.faq__q');
+    q.setAttribute('aria-expanded', 'false');
+    q.addEventListener('click', function () {
+      var open = f.classList.toggle('is-open');
+      q.setAttribute('aria-expanded', String(open));
+    });
+  });
+
+  /* ---------------- stat count-up ---------------- */
+  function fmt(el, v) {
+    return String(Math.round(v)) + (el.dataset.suffix || '');
+  }
+  function runCount(el) {
+    if (el.dataset.counted === '1') return;
+    el.dataset.counted = '1';
+    var target = parseFloat(el.dataset.countTo);
+    var dur = 1700, delay = parseInt(el.dataset.delay || '0', 10);
+    if (reduced || isNaN(target)) { el.textContent = fmt(el, target); return; }
+    el.textContent = fmt(el, 0);
+    setTimeout(function () {
+      var start = null;
+      function frame(ts) {
+        if (start === null) start = ts;
+        var p = Math.min((ts - start) / dur, 1);
+        el.textContent = fmt(el, target * (1 - Math.pow(1 - p, 4)));
+        if (p < 1) requestAnimationFrame(frame); else el.textContent = fmt(el, target);
+      }
+      requestAnimationFrame(frame);
+    }, delay);
+  }
+
+  /* ---------------- reveal on scroll + counters ---------------- */
+  var io = null;
+  if (!reduced && 'IntersectionObserver' in window) {
+    io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var el = e.target;
+        if (el.classList.contains('rv')) el.classList.add('is-in');
+        if (el.hasAttribute('data-count-to')) runCount(el);
+        io.unobserve(el);
+      });
+    }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+  }
+
+  function arm(pageName) {
+    var page = document.getElementById('page-' + pageName);
+    if (!page) return;
+    if (!io) {
+      Array.prototype.forEach.call(page.querySelectorAll('.rv'), function (el) { el.classList.add('is-in'); });
+      return;
+    }
+    Array.prototype.forEach.call(page.querySelectorAll('.rv'), function (el) {
+      el.classList.remove('is-in');
+      io.observe(el);
+    });
+    Array.prototype.forEach.call(page.querySelectorAll('[data-count-to]'), function (el) {
+      el.dataset.counted = '';
+      el.textContent = fmt(el, 0);
+      io.observe(el);
+    });
+  }
+
+  /* ---------------- boot ---------------- */
+  var start = (location.hash || '#home').slice(1);
+  go(BUILT.indexOf(start) === -1 ? 'home' : start, false);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Elara Spatial — Wireframes</title>
+<meta name="viewport" content="width=1440">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+<script>
+/* hides the dev chrome when this page is shown inside the index thumbnail */
+(function(){ if(/[?&]preview\b/.test(location.search)) document.documentElement.className += ' is-preview'; })();
+</script>
+<style>
+/* ============================================================
+   Iteration 00 — lo-fi wireframes
+   Greyscale only: real headlines, grey bars for body copy,
+   labelled boxes for imagery. Ported from Figma page "Wireframes".
+   ============================================================ */
+:root{
+  --ink:#111111;
+  --mut:#667080;
+  --bar:#e2e8f0;
+  --brd:#cbd5e1;
+  --lgt:#f1f5f9;
+  --wht:#ffffff;
+  --gutter:140px;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{
+  margin:0;min-width:1440px;background:var(--wht);color:var(--ink);
+  font-family:"Inter",-apple-system,sans-serif;font-size:16px;line-height:30px;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{margin:0;font-weight:600;line-height:1.2;letter-spacing:-.01em}
+h1{font-size:44px}
+h2{font-size:32px}
+p{margin:0}
+button{font:inherit}
+ul{margin:0;padding:0;list-style:none}
+
+/* ---------- primitives ---------- */
+.sec{padding:72px var(--gutter);display:flex;flex-direction:column;gap:24px}
+.sec--alt{background:var(--lgt)}
+.sec--mid{align-items:center;text-align:center}
+.row{display:flex;gap:24px}
+.row-40{display:flex;gap:40px}
+.row-48{display:flex;gap:48px}
+.col{display:flex;flex-direction:column;gap:16px}
+.flex1{flex:1 0 0;min-width:1px}
+.w760{max-width:760px}
+.w900{max-width:900px}
+.w600{max-width:600px}
+
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);line-height:18px}
+.lede{color:var(--mut)}
+.note{font-size:12px;color:var(--mut);line-height:18px}
+
+/* grey bars stand in for body copy */
+.bars{display:flex;flex-direction:column;gap:8px;width:100%}
+.bars i{display:block;height:10px;border-radius:4px;background:var(--bar)}
+.bars i:last-child{width:60%}
+
+/* labelled image placeholder */
+.ph{
+  display:flex;align-items:center;justify-content:center;
+  background:var(--bar);border-radius:8px;color:var(--mut);
+  font-size:13px;line-height:20px;text-align:center;padding:8px;
+}
+
+/* buttons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:12px 20px;border-radius:6px;font-size:14px;font-weight:600;line-height:20px;
+  border:1px solid transparent;cursor:pointer;text-decoration:none;white-space:nowrap;
+  transition:background-color .15s ease,color .15s ease;
+}
+.btn--p{background:var(--ink);color:var(--wht)}
+.btn--p:hover{background:#333}
+.btn--s{background:var(--wht);border-color:var(--ink);color:var(--ink)}
+.btn--s:hover{background:var(--lgt)}
+.btns{display:flex;gap:16px;align-items:center}
+
+/* cards */
+.card{
+  background:var(--wht);border:1px solid var(--brd);border-radius:8px;padding:20px;
+  display:flex;flex-direction:column;gap:10px;
+}
+.card__t{font-size:15px;font-weight:600;line-height:24px}
+.card--alt{background:var(--lgt);border-color:transparent}
+.cards{display:flex;gap:24px;align-items:stretch}
+.cards--40{gap:40px}
+.cards > .card{flex:1 0 0;min-width:1px}
+
+/* inline text link */
+.tlink{font-size:15px;font-weight:600;color:var(--ink);background:none;border:0;padding:0;cursor:pointer;text-align:left}
+.tlink:hover{text-decoration:underline}
+
+/* ---------- nav ---------- */
+.nav{
+  position:sticky;top:0;z-index:50;background:var(--wht);
+  border-bottom:1px solid var(--brd);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px var(--gutter);
+}
+.nav__logo{font-size:18px;font-weight:700;background:none;border:0;padding:0;cursor:pointer;color:var(--ink)}
+.nav__links{display:flex;align-items:center;gap:28px}
+.nav__link{
+  font-size:14px;color:var(--mut);background:none;border:0;padding:4px 0;cursor:pointer;
+  position:relative;white-space:nowrap;
+}
+.nav__link:hover{color:var(--ink)}
+.nav__link.is-active{color:var(--ink);font-weight:600}
+.nav__link.is-active::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--ink)}
+
+/* ---------- footer ---------- */
+.footer{background:var(--ink);color:var(--wht);padding:48px var(--gutter);display:flex;flex-direction:column;gap:16px}
+.footer__logo{font-size:16px;font-weight:700}
+.footer__links{display:flex;gap:24px;flex-wrap:wrap}
+.footer__links button{font-size:13px;color:#b3b8c2;background:none;border:0;padding:0;cursor:pointer}
+.footer__links button:hover{color:var(--wht)}
+.footer__meta{font-size:13px;color:#b3b8c2}
+.footer__copy{font-size:12px;color:#8c93a1}
+
+/* ---------- stats ---------- */
+.stats{display:flex;gap:24px;width:100%}
+.stat{flex:1 0 0;min-width:1px;background:var(--lgt);border-radius:8px;padding:24px 20px;display:flex;flex-direction:column;gap:8px}
+.stat b{font-size:36px;font-weight:600;line-height:44px}
+.stat span{font-size:13px;color:var(--mut);line-height:20px}
+
+/* ---------- FAQ accordion ---------- */
+.faqs{display:flex;flex-direction:column;gap:12px;width:100%}
+.faq{background:var(--wht);border:1px solid var(--brd);border-radius:6px}
+.faq__q{
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:24px;
+  padding:16px 20px;background:none;border:0;cursor:pointer;text-align:left;
+  font-size:15px;font-weight:600;line-height:24px;color:var(--ink);
+}
+.faq__sign{font-size:18px;color:var(--mut);flex-shrink:0;transition:transform .2s ease}
+.faq.is-open .faq__sign{transform:rotate(45deg)}
+.faq__a{display:none;padding:0 20px 20px}
+.faq.is-open .faq__a{display:block}
+
+/* ---------- bullets ---------- */
+.blist{display:flex;flex-direction:column;gap:12px}
+.blist li{display:flex;gap:8px;font-size:13px;line-height:22px}
+.blist li::before{content:"\2022";color:var(--mut)}
+
+/* ---------- process steps ---------- */
+.steps{display:flex;gap:20px;width:100%}
+.step{flex:1 0 0;min-width:1px;background:var(--wht);border:1px solid var(--brd);border-radius:8px;padding:20px 16px;display:flex;flex-direction:column;gap:10px}
+.step b{font-size:24px;font-weight:600;color:var(--mut);line-height:32px}
+
+/* ---------- timeline ---------- */
+.tl{display:flex;gap:24px;width:100%}
+.tl div{flex:1 0 0;min-width:1px;background:var(--lgt);border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.tl b{font-size:14px;font-weight:600;line-height:22px}
+.tl span{font-size:12px;color:var(--mut);line-height:18px}
+
+/* ---------- leadership ---------- */
+.people{display:flex;gap:16px;width:100%}
+.person{flex:1 0 0;min-width:1px;background:var(--wht);border:1px solid var(--brd);border-radius:8px;padding:20px 16px;display:flex;flex-direction:column;gap:10px}
+.person .avatar{width:64px;height:64px;border-radius:50%;background:var(--bar)}
+.person b{font-size:14px;font-weight:600;line-height:22px}
+.person span{font-size:12px;color:var(--mut);line-height:18px}
+
+/* ---------- blog ---------- */
+.posts{display:flex;flex-direction:column;gap:24px;width:100%}
+.post{flex:1 0 0;min-width:1px;background:var(--wht);border:1px solid var(--brd);border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:12px;cursor:pointer}
+.post:hover{border-color:var(--ink)}
+.post .ph{height:180px}
+.post b{font-size:15px;font-weight:600;line-height:24px}
+.post span{font-size:12px;color:var(--mut);line-height:18px}
+
+/* ---------- contact form ---------- */
+.form{
+  flex:1 0 0;min-width:1px;background:var(--wht);border:1px solid var(--brd);border-radius:8px;
+  padding:32px;display:flex;flex-direction:column;gap:16px;
+}
+.form h3{font-size:22px;font-weight:600}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:13px;font-weight:600;line-height:20px}
+.field input,.field select,.field textarea{
+  width:100%;padding:12px;border:1px solid var(--brd);border-radius:6px;background:var(--wht);
+  font-family:inherit;font-size:13px;line-height:20px;color:var(--ink);
+}
+.field textarea{min-height:96px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:2px solid var(--ink);outline-offset:-2px}
+.field.has-error input,.field.has-error select{border-color:#b00020;background:#fff5f6}
+.field__err{display:none;font-size:12px;line-height:18px;color:#b00020}
+.field.has-error .field__err{display:block}
+.form__ok{display:none;background:var(--lgt);border-left:3px solid var(--ink);padding:12px 16px;font-size:13px;line-height:22px}
+.form__ok.is-on{display:block}
+.cinfo{display:flex;flex-direction:column;gap:20px}
+.cinfo b{font-size:14px;font-weight:600;line-height:22px}
+.cinfo span{font-size:14px;color:var(--mut);line-height:22px}
+
+/* ---------- routing ---------- */
+.page{display:none}
+.page.is-active{display:block;animation:fade .2s ease}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* ---------- dev chrome ---------- */
+.devbar{position:fixed;right:16px;bottom:16px;z-index:200;display:flex;gap:8px}
+.devbtn{
+  background:rgba(0,0,0,.8);color:#fff;border:0;padding:8px 14px;
+  font-size:12px;line-height:18px;font-family:inherit;text-decoration:none;
+  opacity:.3;cursor:pointer;transition:opacity .2s ease;
+}
+.devbtn:hover{opacity:1}
+html.is-preview .devbar{display:none}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <button class="nav__logo" data-goto="home">Elara Spatial</button>
+  <nav class="nav__links">
+    <button class="nav__link" data-goto="home">Home</button>
+    <button class="nav__link" data-goto="whatitis">What It Is</button>
+    <button class="nav__link" data-goto="howitworks">How It Works</button>
+    <button class="nav__link" data-goto="ai">AI Responsibility</button>
+    <button class="nav__link" data-goto="company">Company</button>
+    <button class="nav__link" data-goto="blog">Blog</button>
+    <button class="nav__link" data-goto="contact">Contact</button>
+    <button class="btn btn--p" data-goto="contact">Request a Demo</button>
+  </nav>
+</header>
+
+<main id="main">
+<!-- ============================ HOME ============================ -->
+<section class="page" id="page-home" data-page="home">
+
+  <div class="sec">
+    <h1 class="w900">Turn simple property photos into objective truth.</h1>
+    <p class="lede w760">Every hour an adjuster spends ruling out unknowns is an hour a family waits for their home to be made whole again. [Product Name] enables anyone with a smartphone to harness the power of state-of-the-art spatial intelligence.</p>
+    <div class="btns">
+      <button class="btn btn--p" data-goto="contact">Request a Demo</button>
+      <button class="btn btn--s" data-goto="howitworks">See How It Works</button>
+    </div>
+    <div class="ph" style="height:360px">Hero visual — capture-to-estimate demo</div>
+  </div>
+
+  <div class="sec sec--alt">
+    <p class="eyebrow">Product Overview</p>
+    <h2 class="w760">Go from image to insight, with [Product Name]</h2>
+    <div class="row-48">
+      <div class="col flex1">
+        <div class="bars"><i></i><i></i><i></i><i></i></div>
+        <div class="bars"><i></i><i></i><i></i></div>
+      </div>
+      <div class="ph" style="width:520px;height:280px;flex:none">3D room reconstruction</div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2 class="w760">Data-driven technology. Industry-proven results.</h2>
+    <div class="stats">
+      <div class="stat"><b>50%</b><span>More claims processed by adjuster</span></div>
+      <div class="stat"><b>40%+</b><span>Claim cycle time reduction</span></div>
+      <div class="stat"><b>80%+</b><span>Estimates returned without errors</span></div>
+      <div class="stat"><b>90%+</b><span>First-time photo capture success rate</span></div>
+    </div>
+    <p class="note">Results from production deployments with top-10 U.S. carriers.</p>
+  </div>
+
+  <div class="sec sec--alt">
+    <p class="eyebrow">Responsible AI</p>
+    <h2 class="w760">Built to be trusted by adjusters, carriers, and regulators.</h2>
+    <div class="row-48">
+      <div class="col flex1">
+        <div class="bars"><i></i><i></i><i></i><i></i></div>
+        <div class="bars"><i></i><i></i><i></i></div>
+      </div>
+      <div class="col flex1" style="gap:12px">
+        <div class="card" style="padding:12px 16px">Computer vision — to process images</div>
+        <div class="card" style="padding:12px 16px">Generative models — 3D view from anonymized images</div>
+        <div class="card" style="padding:12px 16px">Vision-language models — internal tooling only</div>
+      </div>
+    </div>
+    <button class="tlink" data-goto="ai">Learn About Our AI Approach &rarr;</button>
+  </div>
+
+  <div class="sec sec--mid">
+    <h2 class="w760">Ready to process claims at the speed of life?</h2>
+    <p class="lede w600">See how [Product Name] fits seamlessly into adjusters’ workflows.</p>
+    <button class="btn btn--p" data-goto="contact">Request a Demo</button>
+  </div>
+
+  <div class="sec sec--alt">
+    <h2>FAQ</h2>
+    <div class="faqs">
+      <div class="faq"><button class="faq__q">What does [Product Name] actually do?<span class="faq__sign">+</span></button><div class="faq__a"><div class="bars"><i></i><i></i><i></i></div></div></div>
+      <div class="faq"><button class="faq__q">Who uses [Product Name]?<span class="faq__sign">+</span></button><div class="faq__a"><div class="bars"><i></i><i></i></div></div></div>
+      <div class="faq"><button class="faq__q">What kinds of claims does it handle today?<span class="faq__sign">+</span></button><div class="faq__a"><div class="bars"><i></i><i></i></div></div></div>
+      <div class="faq"><button class="faq__q">Does AI make the final call on estimates?<span class="faq__sign">+</span></button><div class="faq__a"><div class="bars"><i></i><i></i><i></i></div></div></div>
+      <div class="faq"><button class="faq__q">How fast is it really?<span class="faq__sign">+</span></button><div class="faq__a"><div class="bars"><i></i><i></i></div></div></div>
+      <div class="faq"><button class="faq__q">Do policyholders need to download an app?<span class="faq__sign">+</span></button><div class="faq__a"><div class="bars"><i></i><i></i></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= WHAT IT IS ========================= -->
+<section class="page" id="page-whatitis" data-page="whatitis">
+
+  <div class="sec">
+    <p class="eyebrow">What It Is</p>
+    <h1 class="w900">Property assessments at the speed of life.</h1>
+    <p class="lede w760">[Product Name] is Elara Spatial’s flagship product — a spatial AI platform that turns smartphone photos into audit-ready documentation and an estimate of property damage.</p>
+    <div class="ph" style="height:320px">Product overview visual</div>
+  </div>
+
+  <div class="sec sec--alt">
+    <h2 class="w760">One platform. Four ways to deploy.</h2>
+    <p class="lede w600">[Product Name] adapts to your existing workflow.</p>
+    <div class="cards cards--40">
+      <div class="card"><p class="card__t">Policyholder at FNOL</p><div class="bars"><i></i><i></i><i></i></div></div>
+      <div class="card"><p class="card__t">Mitigation Technician</p><div class="bars"><i></i><i></i><i></i></div></div>
+      <div class="card"><p class="card__t">Field Adjuster</p><div class="bars"><i></i><i></i><i></i></div></div>
+      <div class="card"><p class="card__t">Desk Adjuster</p><div class="bars"><i></i><i></i><i></i></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2 class="w760">Designed for everyone who touches the claim.</h2>
+    <div class="cards">
+      <div class="card"><p class="card__t">Insurance Carriers</p><div class="bars"><i></i><i></i><i></i><i></i></div></div>
+      <div class="card"><p class="card__t">Adjusters</p><div class="bars"><i></i><i></i><i></i><i></i></div></div>
+      <div class="card"><p class="card__t">Mitigation Companies</p><div class="bars"><i></i><i></i><i></i><i></i></div></div>
+    </div>
+  </div>
+
+  <div class="sec sec--alt">
+    <h2>Benefits</h2>
+    <div class="cards">
+      <div class="card">
+        <p class="card__t">For Carriers</p>
+        <ul class="blist"><li>Lower loss adjustment expense</li><li>Faster settlements</li><li>Evidence-backed estimates</li></ul>
+      </div>
+      <div class="card">
+        <p class="card__t">For Adjusters</p>
+        <ul class="blist"><li>Digital superpowers</li><li>No new hardware or software</li><li>Stay in control</li><li>Back to the work that matters</li></ul>
+      </div>
+      <div class="card">
+        <p class="card__t">For Policyholders</p>
+        <ul class="blist"><li>Settlement in days, not weeks</li><li>Privacy maintained</li><li>Transparent outcomes</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec sec--mid">
+    <h2 class="w760">See [Product Name] in action on a real claim.</h2>
+    <p class="lede w600">Bring us a representative claim, and we’ll walk you through what [Product Name] does with it.</p>
+    <button class="btn btn--p" data-goto="contact">Request a Demo</button>
+  </div>
+
+  <div class="sec sec--alt">
+    <h2>FAQ</h2>
+    <div class="faqs">
+      <div class="faq"><button class="faq__q">Why does this only work for water claims today?<span class="faq__sign">+</span></button><div class="faq__a"><div class="bars"><i></i><i></i></div></div></div>
+      <div class="faq"><button class="faq__q">Does the solution only work for small claims?<span class="faq__sign">+</span></button><div class="faq__a"><div class="bars"><i></i><i></i><i></i></div></div></div>
+      <div class="faq"><button class="faq__q">Can the solution be used in the field?<span class="faq__sign">+</span></button><div class="faq__a"><div class="bars"><i></i><i></i></div></div></div>
+      <div class="faq"><button class="faq__q">Does the solution work after mitigation?<span class="faq__sign">+</span></button><div class="faq__a"><div class="bars"><i></i></div></div></div>
+      <div class="faq"><button class="faq__q">Can [Product Name] make coverage decisions?<span class="faq__sign">+</span></button><div class="faq__a"><div class="bars"><i></i><i></i></div></div></div>
+      <div class="faq"><button class="faq__q">What happens during a catastrophe?<span class="faq__sign">+</span></button><div class="faq__a"><div class="bars"><i></i><i></i></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== HOW IT WORKS ======================== -->
+<section class="page" id="page-howitworks" data-page="howitworks">
+
+  <div class="sec">
+    <p class="eyebrow">How It Works</p>
+    <h1 class="w900">Five steps from photo to estimate.</h1>
+    <p class="lede w760">[Product Name] is purpose-built to slot into the workflow your team already runs. Here’s what happens between the first photo and the finished estimate.</p>
+  </div>
+
+  <div class="sec sec--alt">
+    <div class="steps">
+      <div class="step"><b>1</b><p class="card__t">Capture</p><div class="bars"><i></i><i></i><i></i></div></div>
+      <div class="step"><b>2</b><p class="card__t">Privacy Filter</p><div class="bars"><i></i><i></i><i></i></div></div>
+      <div class="step"><b>3</b><p class="card__t">3D Reconstruction</p><div class="bars"><i></i><i></i><i></i></div></div>
+      <div class="step"><b>4</b><p class="card__t">Damage + Material ID</p><div class="bars"><i></i><i></i><i></i></div></div>
+      <div class="step"><b>5</b><p class="card__t">Rules-Based Estimate</p><div class="bars"><i></i><i></i><i></i></div></div>
+    </div>
+    <p class="lede w760" style="font-size:14px">The output? An audit-ready damage estimate and documentation that adjusters review, edit, and approve. The intelligence is AI. The judgment is yours.</p>
+  </div>
+
+  <div class="sec">
+    <h2 class="w760">Flexible deployment anywhere in the workflow.</h2>
+    <div class="row-48">
+      <div class="col flex1">
+        <div class="bars"><i></i><i></i><i></i><i></i></div>
+        <div class="bars"><i></i><i></i><i></i></div>
+      </div>
+      <div class="ph" style="width:520px;height:240px;flex:none">Workflow diagram</div>
+    </div>
+  </div>
+
+  <div class="sec sec--alt">
+    <h2 class="w760">No new systems. No long training sessions.</h2>
+    <div class="cards">
+      <div class="card"><p class="card__t">1 hour adjuster training</p><div class="bars"><i></i><i></i></div></div>
+      <div class="card"><p class="card__t">Native Xactimate integration</p><div class="bars"><i></i><i></i></div></div>
+      <div class="card"><p class="card__t">Full customer support</p><div class="bars"><i></i><i></i></div></div>
+      <div class="card"><p class="card__t">Metrics tracking built in</p><div class="bars"><i></i><i></i></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2 class="w760">Integrated into the tools the industry already uses</h2>
+    <div class="row">
+      <div class="ph" style="width:240px;height:80px;flex:none">Xactimate</div>
+      <div class="ph" style="width:240px;height:80px;flex:none">XactAnalysis</div>
+      <div class="ph" style="width:240px;height:80px;flex:none">Cotality (measurements only)</div>
+    </div>
+    <div class="bars w760"><i></i><i></i></div>
+  </div>
+
+  <div class="sec sec--alt">
+    <h2 class="w760">Transparent, volume-based pricing.</h2>
+    <div class="bars" style="max-width:560px"><i></i><i></i><i></i></div>
+    <p class="lede w600">For pricing tailored to your volume, talk to our team.</p>
+    <button class="btn btn--p" data-goto="contact">Request Pricing</button>
+  </div>
+
+  <div class="sec sec--mid">
+    <h2 class="w760">Want to see it run on a real claim?</h2>
+    <p class="lede w600">Bring us one of yours — we’ll show you exactly what comes back.</p>
+    <button class="btn btn--p" data-goto="contact">Request a Demo</button>
+  </div>
+
+  <div class="sec sec--alt">
+    <h2>FAQ</h2>
+    <div class="faqs">
+      <div class="faq"><button class="faq__q">Is it possible to route claims automatically?<span class="faq__sign">+</span></button><div class="faq__a"><div class="bars"><i></i><i></i></div></div></div>
+      <div class="faq"><button class="faq__q">How do we know which workflow is best?<span class="faq__sign">+</span></button><div class="faq__a"><div class="bars"><i></i><i></i></div></div></div>
+      <div class="faq"><button class="faq__q">Why can’t [Product Name] deliver results instantly?<span class="faq__sign">+</span></button><div class="faq__a"><div class="bars"><i></i><i></i></div></div></div>
+      <div class="faq"><button class="faq__q">Do you support catastrophe response?<span class="faq__sign">+</span></button><div class="faq__a"><div class="bars"><i></i><i></i></div></div></div>
+      <div class="faq"><button class="faq__q">Do you have SOC-II?<span class="faq__sign">+</span></button><div class="faq__a"><div class="bars"><i></i></div></div></div>
+    </div>
+  </div>
+</section>
+<!-- ====================== AI RESPONSIBILITY ====================== -->
+<section class="page" id="page-ai" data-page="ai">
+
+  <div class="sec">
+    <p class="eyebrow">AI Responsibility</p>
+    <h1 class="w900">Responsible AI is the foundation of everything we do.</h1>
+    <p class="lede w760">Trust is the foundation on which insurance is built. From the first prototype, we’ve designed our system so that AI stays in its lane — humans control all judgment, coverage decisions, and accountability.</p>
+  </div>
+
+  <div class="sec sec--alt">
+    <h2 class="w760">Our AI empowers adjusters. It does not replace them.</h2>
+    <div class="row-48">
+      <div class="col flex1">
+        <div class="bars"><i></i><i></i><i></i><i></i></div>
+        <div class="bars"><i></i><i></i><i></i><i></i></div>
+      </div>
+      <div class="ph" style="width:520px;height:260px;flex:none">Adjuster + AI illustration</div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2 class="w760">Because the industry needs a credible AI partner, we built one.</h2>
+    <div class="col w760">
+      <div class="bars"><i></i><i></i><i></i><i></i></div>
+      <div class="bars"><i></i><i></i></div>
+    </div>
+  </div>
+
+  <div class="sec sec--alt">
+    <h2 class="w760">Clearing up the misconceptions.</h2>
+    <div class="cards">
+      <div class="card" style="padding:24px">
+        <p class="card__t" style="font-size:17px">[Product Name] is…</p>
+        <ul class="blist">
+          <li>A purpose-built tool for documenting interior property damage</li>
+          <li>A computer vision + 3D reconstruction system</li>
+          <li>A rules-based estimation engine using carrier guidelines</li>
+          <li>A human-in-the-loop system — every result QA’d</li>
+        </ul>
+      </div>
+      <div class="card" style="padding:24px">
+        <p class="card__t" style="font-size:17px">It is NOT…</p>
+        <ul class="blist">
+          <li>A coverage decision system</li>
+          <li>A fraud scoring or claim denial engine</li>
+          <li>A black box — every estimate is traceable</li>
+          <li>Powered by public generative AI like ChatGPT</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2 class="w760">Privacy is built in — not bolted on.</h2>
+    <div class="col" style="gap:24px">
+      <div class="cards">
+        <div class="card card--alt"><p class="card__t">PII removal at capture</p><div class="bars"><i></i><i></i></div></div>
+        <div class="card card--alt"><p class="card__t">Anonymized data throughout</p><div class="bars"><i></i><i></i></div></div>
+        <div class="card card--alt"><p class="card__t">Your data, governed by your contract</p><div class="bars"><i></i><i></i></div></div>
+      </div>
+      <div class="cards">
+        <div class="card card--alt"><p class="card__t">Full traceability and audit logs</p><div class="bars"><i></i><i></i></div></div>
+        <div class="card card--alt"><p class="card__t">SOC-II Type II compliant</p><div class="bars"><i></i><i></i></div></div>
+        <div class="card card--alt"><p class="card__t">Configurable, not hard-coded</p><div class="bars"><i></i><i></i></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================== COMPANY =========================== -->
+<section class="page" id="page-company" data-page="company">
+
+  <div class="sec">
+    <p class="eyebrow">Company</p>
+    <h1 class="w900">It all started with a simple question: Why is it still so hard to assess a property?</h1>
+    <div class="col w760">
+      <div class="bars"><i></i><i></i><i></i><i></i></div>
+      <div class="bars"><i></i><i></i><i></i></div>
+    </div>
+    <div class="tl">
+      <div><b>January 2024</b><span>First product launched as a prototype</span></div>
+      <div><b>Early 2025</b><span>Prototype customers renewed and increased consumption</span></div>
+      <div><b>Late 2025</b><span>First production deployment in a top-10 carrier</span></div>
+      <div><b>Early 2026</b><span>More pilots with new customers</span></div>
+    </div>
+  </div>
+
+  <div class="sec sec--alt">
+    <h2 class="w760">The values we never compromise on</h2>
+    <div class="cards" style="gap:16px">
+      <div class="card"><p class="card__t">Raise the Bar</p><div class="bars"><i></i><i></i><i></i></div></div>
+      <div class="card"><p class="card__t">Move Fast and Together</p><div class="bars"><i></i><i></i><i></i></div></div>
+      <div class="card"><p class="card__t">Engineer for Equity</p><div class="bars"><i></i><i></i><i></i></div></div>
+      <div class="card"><p class="card__t">Own the Outcome</p><div class="bars"><i></i><i></i><i></i></div></div>
+      <div class="card"><p class="card__t">Fuel the Humans</p><div class="bars"><i></i><i></i><i></i></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2 class="w760">Deep domain knowledge. Vast tech expertise.</h2>
+    <div class="people">
+      <div class="person"><div class="avatar"></div><b>Ingrid Flores</b><span>Chief Executive Officer</span><div class="bars"><i></i><i></i></div></div>
+      <div class="person"><div class="avatar"></div><b>Rachelle Villalon</b><span>Founder + Strategic Advisor</span><div class="bars"><i></i><i></i></div></div>
+      <div class="person"><div class="avatar"></div><b>Bruce Alde</b><span>Chief Operating Officer</span><div class="bars"><i></i><i></i></div></div>
+      <div class="person"><div class="avatar"></div><b>Daria Marmer</b><span>Chief Product Officer</span><div class="bars"><i></i><i></i></div></div>
+      <div class="person"><div class="avatar"></div><b>Mica Ari-Nachimson</b><span>Chief Technical Officer</span><div class="bars"><i></i><i></i></div></div>
+    </div>
+  </div>
+
+  <div class="sec sec--alt">
+    <h2 class="w760">Backed by professionals who understand AI and insurance.</h2>
+    <div class="row">
+      <div class="ph" style="width:240px;height:80px;flex:none">Investor 1</div>
+      <div class="ph" style="width:240px;height:80px;flex:none">Investor 2</div>
+      <div class="ph" style="width:240px;height:80px;flex:none">Investor 3</div>
+      <div class="ph" style="width:240px;height:80px;flex:none">Strategic partners</div>
+    </div>
+  </div>
+
+  <div class="sec sec--mid">
+    <h2 class="w900">Work with us to change how the world interacts with the built environment.</h2>
+    <p class="lede w600">Become part of a small, ambitious team building something genuinely new.</p>
+    <button class="btn btn--p">View Open Roles &rarr;</button>
+  </div>
+</section>
+
+<!-- ============================ BLOG ============================ -->
+<section class="page" id="page-blog" data-page="blog">
+
+  <div class="sec">
+    <p class="eyebrow">Blog</p>
+    <h1 class="w900">Behind the intelligence</h1>
+    <p class="lede w760">Learn what’s changing in property claims, how spatial AI works, and what we’re discovering as we build.</p>
+  </div>
+
+  <div class="sec sec--alt">
+    <div class="posts">
+      <div class="cards">
+        <div class="post"><div class="ph">Post image</div><b>Post title goes here</b><div class="bars"><i></i><i></i></div><span>Category · 5 min read</span></div>
+        <div class="post"><div class="ph">Post image</div><b>Post title goes here</b><div class="bars"><i></i><i></i></div><span>Category · 5 min read</span></div>
+        <div class="post"><div class="ph">Post image</div><b>Post title goes here</b><div class="bars"><i></i><i></i></div><span>Category · 5 min read</span></div>
+      </div>
+      <div class="cards">
+        <div class="post"><div class="ph">Post image</div><b>Post title goes here</b><div class="bars"><i></i><i></i></div><span>Category · 5 min read</span></div>
+        <div class="post"><div class="ph">Post image</div><b>Post title goes here</b><div class="bars"><i></i><i></i></div><span>Category · 5 min read</span></div>
+        <div class="post"><div class="ph">Post image</div><b>Post title goes here</b><div class="bars"><i></i><i></i></div><span>Category · 5 min read</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec sec--mid">
+    <h2 class="w760">Want us in your inbox?</h2>
+    <p class="lede w600">We only publish a few times each quarter — so you won’t be bombarded with emails.</p>
+    <button class="btn btn--s">Follow on LinkedIn &rarr;</button>
+  </div>
+</section>
+
+<!-- =========================== CONTACT =========================== -->
+<section class="page" id="page-contact" data-page="contact">
+
+  <div class="sec">
+    <p class="eyebrow">Contact</p>
+    <h1 class="w900">Tell us about your claims process. We’ll show you what’s possible.</h1>
+    <p class="lede w760">Interested in a demo? Curious about spatial AI? You’ll get a real response from a real human, usually within one business day.</p>
+  </div>
+
+  <div class="sec sec--alt">
+    <div class="row-48">
+      <div class="cinfo flex1">
+        <div><b>General inquiries</b><br><span>hello@elaraspatial.com</span></div>
+        <div><b>Sales and demos</b><br><span>sales@elaraspatial.com</span></div>
+        <div><b>Press and media</b><br><span>press@elaraspatial.com</span></div>
+      </div>
+
+      <form class="form" id="contact-form" novalidate style="max-width:520px">
+        <h3>Get in touch</h3>
+        <p class="lede" style="font-size:14px;line-height:22px">Fill this out, and we’ll be in touch within one business day.</p>
+        <div class="form__ok" id="form-ok">Thanks — we got it. Someone from our team will be in touch within one business day.</div>
+        <div class="field">
+          <label for="w-name">Full name *</label>
+          <input id="w-name" name="name" type="text" required>
+          <span class="field__err">Please enter your full name.</span>
+        </div>
+        <div class="field">
+          <label for="w-email">Work email *</label>
+          <input id="w-email" name="email" type="email" required>
+          <span class="field__err">Please enter a valid work email.</span>
+        </div>
+        <div class="field">
+          <label for="w-company">Company *</label>
+          <input id="w-company" name="company" type="text" required>
+          <span class="field__err">Please enter your company.</span>
+        </div>
+        <div class="field">
+          <label for="w-role">Role / Title</label>
+          <input id="w-role" name="role" type="text">
+        </div>
+        <div class="field">
+          <label for="w-reason">What brings you here?</label>
+          <select id="w-reason" name="reason">
+            <option value="">Select an option</option>
+            <option>I'd like a demo</option>
+            <option>I'm evaluating AI for claims</option>
+            <option>I'm a partner or vendor</option>
+            <option>I'm a journalist</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="w-msg">Tell us a bit more</label>
+          <textarea id="w-msg" name="message"></textarea>
+        </div>
+        <button class="btn btn--p" type="submit" style="width:100%">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+<!--PAGES-->
+</main>
+
+<footer class="footer">
+  <p class="footer__logo">Elara Spatial</p>
+  <div class="footer__links">
+    <button data-goto="home">Home</button>
+    <button data-goto="whatitis">What It Is</button>
+    <button data-goto="howitworks">How It Works</button>
+    <button data-goto="ai">AI Responsibility</button>
+    <button data-goto="company">Company</button>
+    <button data-goto="blog">Blog</button>
+    <button data-goto="contact">Contact</button>
+  </div>
+  <p class="footer__meta">hello@elaraspatial.com &nbsp;·&nbsp; sales@elaraspatial.com &nbsp;·&nbsp; press@elaraspatial.com</p>
+  <p class="footer__copy">© 2026 Elara Spatial. All rights reserved.</p>
+</footer>
+
+<div class="devbar">
+  <a class="devbtn" href="index.html">&#8592; All iterations</a>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ---------------- routing — all seven pages are built ---------------- */
+  var TITLES = {
+    home:       'Wireframes — Home',
+    whatitis:   'Wireframes — What It Is',
+    howitworks: 'Wireframes — How It Works',
+    ai:         'Wireframes — AI Responsibility',
+    company:    'Wireframes — Company',
+    blog:       'Wireframes — Blog',
+    contact:    'Wireframes — Contact'
+  };
+  var PAGES = Object.keys(TITLES);
+
+  var pages    = Array.prototype.slice.call(document.querySelectorAll('.page'));
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav__link'));
+
+  function go(name, push) {
+    if (PAGES.indexOf(name) === -1) name = 'home';
+    pages.forEach(function (p) { p.classList.toggle('is-active', p.dataset.page === name); });
+    navLinks.forEach(function (l) { l.classList.toggle('is-active', l.dataset.goto === name); });
+    if (push !== false && location.hash !== '#' + name) history.pushState(null, '', '#' + name);
+    document.title = 'Elara Spatial — ' + TITLES[name];
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    closeAllFaqs();
+  }
+
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest('[data-goto]');
+    if (!t) return;
+    e.preventDefault();
+    go(t.dataset.goto);
+  });
+
+  window.addEventListener('popstate', function () {
+    go((location.hash || '#home').slice(1), false);
+  });
+
+  /* ---------------- FAQ accordions ---------------- */
+  var faqs = Array.prototype.slice.call(document.querySelectorAll('.faq'));
+
+  function closeAllFaqs() {
+    faqs.forEach(function (f) {
+      f.classList.remove('is-open');
+      f.querySelector('.faq__q').setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  faqs.forEach(function (f) {
+    var q = f.querySelector('.faq__q');
+    q.setAttribute('aria-expanded', 'false');
+    q.addEventListener('click', function () {
+      var open = f.classList.toggle('is-open');
+      q.setAttribute('aria-expanded', String(open));
+    });
+  });
+
+  /* ---------------- contact form ---------------- */
+  var form = document.getElementById('contact-form');
+  var ok   = document.getElementById('form-ok');
+
+  function valid(input) {
+    var v = input.value.trim();
+    if (!input.hasAttribute('required')) return true;
+    if (!v) return false;
+    if (input.type === 'email') return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+    return true;
+  }
+
+  if (form) {
+    var required = Array.prototype.slice.call(form.querySelectorAll('[required]'));
+
+    required.forEach(function (input) {
+      input.addEventListener('blur', function () {
+        input.closest('.field').classList.toggle('has-error', !valid(input));
+      });
+      input.addEventListener('input', function () {
+        var field = input.closest('.field');
+        if (field.classList.contains('has-error')) field.classList.toggle('has-error', !valid(input));
+      });
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var firstBad = null;
+      required.forEach(function (input) {
+        var good = valid(input);
+        input.closest('.field').classList.toggle('has-error', !good);
+        if (!good && !firstBad) firstBad = input;
+      });
+      if (firstBad) { ok.classList.remove('is-on'); firstBad.focus(); return; }
+      ok.classList.add('is-on');
+      form.reset();
+      ok.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    });
+  }
+
+  /* ---------------- boot ---------------- */
+  go((location.hash || '#home').slice(1), false);
+})();
+</script>
+</body>
+</html>
