@@ -563,8 +563,8 @@ h3{font-family:var(--body);font-weight:700;font-size:20px;line-height:1.4;margin
 .integ2__pipe{color:var(--mut-2);font-weight:300;font-size:18px}
 @media(max-width:600px){.integ2__sep{display:none}.integ2__row{gap:20px}.integ2__prods{flex-direction:column;gap:12px}.integ2__pipe{display:none}}
 /* who it's for — audience switcher: one integrated element rather than a list */
-.audsw{max-width:860px;margin:44px auto 0;text-align:center}
-.audsw__nav{display:flex;flex-wrap:wrap;gap:30px;justify-content:center;border-bottom:1px solid var(--hair);margin-bottom:34px}
+.audsw{max-width:1080px;margin:44px auto 0;text-align:center}
+.audsw__nav{display:flex;flex-wrap:wrap;gap:26px;justify-content:center;border-bottom:1px solid var(--hair);margin-bottom:34px}
 .audsw__t{position:relative;background:none;border:0;padding:0 0 18px;cursor:pointer;font-family:var(--heading);font-size:18px;font-weight:600;letter-spacing:-.01em;color:var(--mut);transition:color .3s var(--ease)}
 .audsw__t::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--grad-x);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease)}
 .audsw__t:hover{color:var(--ink)}
@@ -2019,6 +2019,7 @@ html.is-preview .devbar{display:none}
               <span class="integ2__chip">XactAnalysis</span>
             </div>
           </div>
+          <img class="integ2__logo" src="assets/cotality_logo.svg" alt="Cotality" style="margin-top:28px">
         </div>
       </div>
     </div>
@@ -2036,53 +2037,15 @@ html.is-preview .devbar{display:none}
           <button type="button" class="audsw__t is-on" data-aud="0" role="tab" aria-selected="true">Insurance carriers</button>
           <button type="button" class="audsw__t" data-aud="1" role="tab" aria-selected="false">Adjusters &amp; claims managers</button>
           <button type="button" class="audsw__t" data-aud="2" role="tab" aria-selected="false">Mitigation &amp; third-party adjusters</button>
+          <button type="button" class="audsw__t" data-aud="3" role="tab" aria-selected="false">Policyholders</button>
         </div>
         <div class="audsw__panels">
           <div class="audsw__p is-on" data-aud="0" role="tabpanel"><p>Running a property book means managing cost per claim, cycle time, and customer experience at the same time. Lumasite improves all three, and it fits into the systems you already run &mdash; without forcing you to replace what you&rsquo;ve already built.</p></div>
           <div class="audsw__p" data-aud="1" role="tabpanel"><p>If you&rsquo;ve spent your career measuring rooms and writing scopes, you know how much of the job is paperwork. Lumasite handles the heavy lifting so you can spend your day on the tough claims and the people behind them.</p></div>
           <div class="audsw__p" data-aud="2" role="tabpanel"><p>If you capture damage on a carrier&rsquo;s behalf, Lumasite turns a walkthrough with your phone into documentation the carrier accepts the first time &mdash; with fewer challenges and less back-and-forth.</p></div>
+          <div class="audsw__p" data-aud="3" role="tabpanel"><p>Policyholders get their claim settled fast, sometimes the same day instead of weeks later. Capture happens on their own time, in their own home, so no stranger ever has to walk through the door. And because every estimate comes from objective measurements and consistent carrier rules, the number they get is fair and predictable, no matter which adjuster reviews it.</p></div>
         </div>
       </div>
-    </div>
-  </div>
-
-  <!-- Value by audience -->
-  <div class="sec sec--tight">
-    <div class="wrap">
-      <div class="mid rv">
-        <p class="eyebrow">Benefits</p>
-        <h2 class="display display--sm">What changes for each side of the claim</h2>
-      </div>
-      <div class="aud rv" style="--d:100ms;margin-top:64px">
-        <div class="aud__c">
-          <h3 class="aud__h">For insurance carriers</h3>
-          <ul class="blist">
-            <li><span><b>Lower cost per claim.</b> Replace costly in-person inspections and manual virtual ones with a capture workflow that scales with your volume.</span></li>
-            <li><span><b>Faster settlements.</b> Cut cycle time by 40% or more before even changing your workflow.</span></li>
-            <li><span><b>Evidence-backed estimates.</b> Every line item traces back to the photo, the measurement, and the rule that produced it.</span></li>
-            <li><span><b>More capacity, same headcount.</b> Up to 125% more adjuster throughput, because reviewing a finished draft is faster than building one.</span></li>
-            <li><span><b>Keep your senior people.</b> Experienced adjusters spend far less time on documentation and more on the work that keeps them in the job.</span></li>
-          </ul>
-        </div>
-        <div class="aud__c">
-          <h3 class="aud__h">For adjusters</h3>
-          <ul class="blist">
-            <li><span><b>Less stress, more claims.</b> Increase your throughput without working longer hours.</span></li>
-            <li><span><b>Nothing new to learn.</b> No hardware, no software to install. Request and receive estimates from the tools you already use: Xactimate and XactAnalysis.</span></li>
-            <li><span><b>You stay in control.</b> Lumasite handles measuring, documentation and line-item selection. You review, edit, and approve every estimate.</span></li>
-            <li><span><b>Back to the work that matters.</b> More time with policyholders and on the complex claims that need your judgment, less time on line items.</span></li>
-          </ul>
-        </div>
-        <div class="aud__c">
-          <h3 class="aud__h">For policyholders</h3>
-          <ul class="blist">
-            <li><span><b>Home sooner, not weeks later.</b> Most claims still take weeks to settle. With Lumasite, the claim can be settled even in the same day.</span></li>
-            <li><span><b>Privacy, kept.</b> Capture happens in your own home, on your own schedule, without opening your door to strangers.</span></li>
-            <li><span><b>A fair, clear number.</b> Every estimate is built from objective measurements and your carrier&rsquo;s consistent rules, so the outcome is the same no matter who is working on it &mdash; the estimate no longer depends on judgment that shifts from adjuster to adjuster.</span></li>
-          </ul>
-        </div>
-      </div>
-      <p class="body rv" style="max-width:760px;margin:44px auto 0;text-align:center"><b>Mitigation companies and third-party adjusters:</b> if you capture damage on a carrier&rsquo;s behalf, Lumasite turns a walkthrough with your phone into documentation the carrier accepts the first time &mdash; with fewer challenges and less back-and-forth.</p>
     </div>
   </div>
 
