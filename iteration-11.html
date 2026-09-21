@@ -290,8 +290,17 @@ h3{font-family:var(--body);font-weight:700;font-size:20px;line-height:1.4;margin
 /* ---------------- numbered caption cards ---------------- */
 .tri{display:flex;gap:24px}
 .tri__i{flex:1 1 0;min-width:1px}
-.tri__ill{height:180px;display:flex;align-items:center;justify-content:center}
-.tri__ill svg{width:118px;height:118px}
+.tri__ill{height:180px;display:flex;align-items:center;justify-content:center;position:relative;transition:transform .5s var(--ease)}
+.tri__ill::before{content:"";position:absolute;top:50%;left:50%;width:154px;height:154px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle at 50% 46%,var(--halo,rgba(255,0,255,.12)),transparent 70%);transition:transform .5s var(--ease),opacity .5s var(--ease);z-index:0}
+.tri__photo{position:relative;z-index:1;width:138px;height:138px;border-radius:50%;padding:3px;background:var(--grad-x);overflow:hidden}
+.tri__photo img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;transition:transform .6s var(--ease)}
+.tri__i:hover .tri__photo img{transform:scale(1.06)}
+.tri__i:nth-child(1) .tri__ill{--halo:rgba(255,0,255,.14)}
+.tri__i:nth-child(2) .tri__ill{--halo:rgba(0,214,214,.20)}
+.tri__i:nth-child(3) .tri__ill{--halo:rgba(127,128,255,.18)}
+.tri__i:nth-child(4) .tri__ill{--halo:rgba(255,0,255,.14)}
+.tri__i:hover .tri__ill{transform:translateY(-5px)}
+.tri__i:hover .tri__ill::before{transform:translate(-50%,-50%) scale(1.12)}
 .tri__ph{height:380px;margin-bottom:22px}
 .tri__t{font-size:16px;font-weight:600;line-height:1.5;margin-bottom:8px}
 .tri__t i{font-style:normal;color:var(--mut-2);margin-right:8px}
@@ -526,28 +535,6 @@ h3{font-family:var(--body);font-weight:700;font-size:20px;line-height:1.4;margin
 .pinktab__d{font-size:15px;line-height:1.6;color:var(--mut)}
 @media(max-width:820px){.pinktabs{grid-template-columns:1fr}}
 /* rollout deployment + value layouts */
-.deploy{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-.deploy__c{
-  position:relative;background:var(--paper);border:1px solid var(--hair);
-  border-radius:18px;padding:36px 36px 34px;overflow:hidden;
-  transition:transform .45s var(--ease),box-shadow .45s var(--ease),border-color .45s var(--ease);
-}
-/* brand rule down the left edge, drawn on hover */
-.deploy__c::after{
-  content:"";position:absolute;left:0;top:0;height:100%;width:3px;
-  background:var(--grad-y);transform:scaleY(0);transform-origin:top;
-  transition:transform .55s var(--ease);
-}
-.deploy__c:hover{transform:translateY(-4px);box-shadow:0 20px 44px rgba(11,11,12,.10);border-color:var(--hair-2)}
-.deploy__c:hover::after{transform:scaleY(1)}
-.deploy__hd{margin-bottom:18px}
-.deploy__num{
-  display:block;margin-bottom:12px;font-family:var(--heading);font-weight:600;
-  font-size:13px;line-height:1;letter-spacing:.16em;color:var(--magenta-d);
-}
-.deploy__role{display:block;font-family:var(--heading);font-weight:600;font-size:20px;line-height:1.25;letter-spacing:-.01em;color:var(--ink)}
-.deploy__d{font-size:15px;line-height:1.66;color:var(--mut)}
-@media(max-width:820px){.deploy{grid-template-columns:1fr}}
 .aud{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .aud__c{background:var(--paper);border:1px solid var(--hair);border-radius:18px;padding:34px 32px}
 .aud__h{color:var(--ink);margin-bottom:20px}
@@ -555,13 +542,12 @@ h3{font-family:var(--body);font-weight:700;font-size:20px;line-height:1.4;margin
 /* integrated-with — lives on white: Verisk logo + product chips */
 .integ2{position:relative;text-align:center}
 .integ2__in{display:flex;flex-direction:column;align-items:center}
-.integ2__row{display:flex;align-items:center;justify-content:center;gap:30px;flex-wrap:wrap;margin-top:22px}
+.integ2__row{display:flex;align-items:center;justify-content:center;gap:22px;flex-wrap:wrap;margin-top:22px}
 .integ2__logo{height:40px;width:auto;display:block}
-.integ2__sep{width:1px;height:40px;background:var(--hair)}
-.integ2__prods{display:flex;align-items:center;gap:16px}
+.integ2__prods{display:flex;align-items:baseline;gap:12px}
 .integ2__chip{font-family:var(--heading);font-size:17px;font-weight:600;color:var(--ink);white-space:nowrap}
-.integ2__pipe{color:var(--mut-2);font-weight:300;font-size:18px}
-@media(max-width:600px){.integ2__sep{display:none}.integ2__row{gap:20px}.integ2__prods{flex-direction:column;gap:12px}.integ2__pipe{display:none}}
+.integ2__amp{font-family:var(--heading);font-size:16px;font-weight:400;color:var(--mut-2)}
+@media(max-width:600px){.integ2__row{gap:22px}}
 /* who it's for — audience switcher: one integrated element rather than a list */
 .audsw{max-width:1080px;margin:44px auto 0;text-align:center}
 .audsw__nav{display:flex;flex-wrap:wrap;gap:26px;justify-content:center;border-bottom:1px solid var(--hair);margin-bottom:34px}
@@ -611,9 +597,9 @@ h3{font-family:var(--body);font-weight:700;font-size:20px;line-height:1.4;margin
 .sec--mag{background:var(--magenta);position:relative;overflow:hidden}
 /* a colored band keeps its own top padding, and the section after it keeps a white gap */
 .sec--mag,.sec--mag + .sec{padding-top:var(--secpad)!important}
-.sec--mag .eyebrow{color:rgba(255,255,255,.72)!important}
-.sec--mag .display{color:#fff}
-.sec--mag .body{color:rgba(255,255,255,.9)}
+.sec--mag .eyebrow{color:var(--ink)!important}
+.sec--mag .display{color:var(--ink)}
+.sec--mag .body{color:var(--ink)}
 .sec--mag .aikinds{background:var(--paper)}
 .sec--mag .aikinds .eyebrow{color:var(--mut)!important}
 /* very light tinted band; keeps its own top padding, and the next section keeps a gap */
@@ -1950,24 +1936,37 @@ html.is-preview .devbar{display:none}
           <p class="lede">Lumasite fits the workflow you already run. Choose the capture path that matches how your claims come in.</p>
         </div>
       </div>
-      <div class="deploy rv" style="--d:100ms;margin-top:64px">
-        <div class="deploy__c">
-          <div class="deploy__hd"><span class="deploy__num">01</span><span class="deploy__role">Policyholder at FNOL</span></div>
-          <p class="deploy__d">Capture happens during the first-notice-of-loss call. The policyholder receives a link, walks through the damaged rooms, and takes the photos. A desk adjuster receives both the claim and the draft estimate.</p>
+      <div class="tri rv" style="--d:100ms;margin-top:72px">
+        <div class="tri__i">
+          <div class="tri__ill">
+            <span class="tri__photo"><img src="assets/deploy-1.jpg" alt="Policyholder photographing water damage on a phone" loading="lazy" width="560" height="560"></span>
+          </div>
+          <p class="tri__t">Policyholder at FNOL</p>
+          <p class="small">Capture happens during the first-notice-of-loss call. The policyholder receives a link, walks through the damaged rooms, and takes the photos. A desk adjuster receives both the claim and the draft estimate.</p>
         </div>
-        <div class="deploy__c">
-          <div class="deploy__hd"><span class="deploy__num">02</span><span class="deploy__role">Mitigation technician</span></div>
-          <p class="deploy__d">Before or after mitigation work, the technician photographs the damaged rooms, noting pre-existing conditions and the full extent of the loss. A desk adjuster receives the documentation and a full draft estimate.</p>
+        <div class="tri__i">
+          <div class="tri__ill">
+            <span class="tri__photo"><img src="assets/deploy-2.jpg" alt="Mitigation technician checking a wall with a moisture meter" loading="lazy" width="560" height="560"></span>
+          </div>
+          <p class="tri__t">Mitigation technician</p>
+          <p class="small">Before or after mitigation work, the technician photographs the damaged rooms, noting pre-existing conditions and the full extent of the loss. A desk adjuster receives the documentation and a full draft estimate.</p>
         </div>
-        <div class="deploy__c">
-          <div class="deploy__hd"><span class="deploy__num">03</span><span class="deploy__role">Field adjuster</span></div>
-          <p class="deploy__d">Documentation takes minutes onsite instead of hours. By the time the adjuster is back at the desk, a full draft estimate is waiting for review.</p>
+        <div class="tri__i">
+          <div class="tri__ill">
+            <span class="tri__photo"><img src="assets/deploy-3.jpg" alt="Field adjuster inspecting a damaged room with a tablet" loading="lazy" width="560" height="560"></span>
+          </div>
+          <p class="tri__t">Field adjuster</p>
+          <p class="small">Documentation takes minutes onsite instead of hours. By the time the adjuster is back at the desk, a full draft estimate is waiting for review.</p>
         </div>
-        <div class="deploy__c">
-          <div class="deploy__hd"><span class="deploy__num">04</span><span class="deploy__role">Desk adjuster</span></div>
-          <p class="deploy__d">The adjuster sends the policyholder a link, then receives a draft estimate without leaving their desk.</p>
+        <div class="tri__i">
+          <div class="tri__ill">
+            <span class="tri__photo"><img src="assets/deploy-4.jpg" alt="Desk adjuster reviewing an estimate on a laptop" loading="lazy" width="560" height="560"></span>
+          </div>
+          <p class="tri__t">Desk adjuster</p>
+          <p class="small">The adjuster sends the policyholder a link, then receives a draft estimate without leaving their desk.</p>
         </div>
       </div>
+      <p class="body rv" style="max-width:720px;margin:56px auto 0;text-align:center">Anyone can capture a claim without compromising estimate quality &mdash; which means you can reserve your most experienced adjusters for QA and complex claims.</p>
     </div>
   </div>
 
@@ -2012,14 +2011,17 @@ html.is-preview .devbar{display:none}
           <p class="eyebrow">Integrated with</p>
           <div class="integ2__row">
             <img class="integ2__logo" src="assets/verisk_logo.svg" alt="Verisk">
-            <span class="integ2__sep" aria-hidden="true"></span>
             <div class="integ2__prods">
               <span class="integ2__chip">Xactimate</span>
-              <span class="integ2__pipe" aria-hidden="true">|</span>
+              <span class="integ2__amp">&amp;</span>
               <span class="integ2__chip">XactAnalysis</span>
             </div>
           </div>
-          <img class="integ2__logo" src="assets/cotality_logo.svg" alt="Cotality" style="margin-top:28px">
+          <div style="width:min(360px,60%);height:1px;background:var(--hair);margin-top:30px"></div>
+          <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-top:26px">
+            <img class="integ2__logo" src="assets/cotality_logo.svg" alt="Cotality">
+            <span style="font-size:12px;letter-spacing:.02em;color:var(--mut-2)">*measurements only</span>
+          </div>
         </div>
       </div>
     </div>
