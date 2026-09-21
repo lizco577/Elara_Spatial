@@ -595,15 +595,15 @@ h3{font-family:var(--body);font-weight:700;font-size:20px;line-height:1.4;margin
 .aikinds__ic{flex:0 0 auto;width:36px;height:36px;object-fit:contain;display:block;margin-top:2px}
 .aikinds__t{font-family:var(--heading);font-weight:600;font-size:18px;color:var(--ink);margin-bottom:4px}
 .aikinds__d{font-size:15px;line-height:1.55;color:var(--mut)}
-/* full-width magenta band — used to break up the Responsible AI section */
-.sec--mag{background:var(--magenta);position:relative;overflow:hidden}
+/* full-width dark topo band — used to break up the Responsible AI section */
+.sec--ink{background:#0B0B0C;position:relative;overflow:hidden}
 /* a colored band keeps its own top padding, and the section after it keeps a white gap */
-.sec--mag,.sec--mag + .sec{padding-top:var(--secpad)!important}
-.sec--mag .eyebrow{color:var(--ink)!important}
-.sec--mag .display{color:var(--ink)}
-.sec--mag .body{color:var(--ink)}
-.sec--mag .aikinds{background:var(--paper)}
-.sec--mag .aikinds .eyebrow{color:var(--mut)!important}
+.sec--ink,.sec--ink + .sec{padding-top:var(--secpad)!important}
+.sec--ink .eyebrow{color:var(--magenta)!important}
+.sec--ink .display{color:#fff}
+.sec--ink .body{color:rgba(255,255,255,.9)}
+.sec--ink .aikinds{background:var(--paper)}
+.sec--ink .aikinds .eyebrow{color:var(--mut)!important}
 /* very light tinted band; keeps its own top padding, and the next section keeps a gap */
 .sec--tint{background:#FAFAFC}
 .sec--tint,.sec--tint + .sec{padding-top:var(--secpad)!important}
@@ -2124,8 +2124,8 @@ html.is-preview .devbar{display:none}
   </div>
 
   <!-- 2 · Responsible AI -->
-  <div class="sec sec--tight sec--mag">
-    <div class="contour" style="color:#fff;opacity:.12"></div>
+  <div class="sec sec--tight sec--ink">
+    <div class="contour" style="color:#fff;opacity:.05;inset:-4%;-webkit-mask-size:auto 100vh;mask-size:auto 100vh;animation:driftSoft 95s linear infinite"></div>
     <div class="wrap">
       <div class="row rv" style="gap:72px">
         <div class="flex1 stack-24" style="min-width:1px">
