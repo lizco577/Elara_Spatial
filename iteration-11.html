@@ -329,12 +329,14 @@ h3{font-family:var(--body);font-weight:700;font-size:20px;line-height:1.4;margin
 
 /* ---------------- logo row ---------------- */
 .logos{display:flex;align-items:center;justify-content:space-between;gap:40px}
-.logo-img{height:38px;width:auto;max-width:168px;object-fit:contain;display:block;filter:grayscale(1);opacity:.6;transition:filter .3s var(--ease),opacity .3s var(--ease)}
+.logo-img{height:38px;width:auto;max-width:168px;object-fit:contain;display:block;filter:grayscale(1);opacity:.6;transition:opacity .3s var(--ease)}
 .logo-img:hover{filter:grayscale(0);opacity:1}
 /* spider capital: render as a grey silhouette, black on hover */
 .logo-img--spider{filter:brightness(0);opacity:.5}
 .logo-img--spider:hover{filter:brightness(0);opacity:1}
 .logo-cell{display:flex;flex-direction:column;align-items:center;gap:12px}
+.logos--lead .logo-img{height:60px;max-width:300px}
+.logos:not(.logos--lead) .logo-img{height:34px}
 .logo-cap{font-size:12px;font-weight:500;letter-spacing:.04em;color:var(--mut-2)}
 .logo-plate{
   flex:1 1 0;min-width:1px;height:56px;display:flex;align-items:center;justify-content:center;
@@ -605,9 +607,9 @@ h3{font-family:var(--body);font-weight:700;font-size:20px;line-height:1.4;margin
 /* very light tinted band; keeps its own top padding, and the next section keeps a gap */
 .sec--tint{background:#FAFAFC}
 .sec--tint,.sec--tint + .sec{padding-top:var(--secpad)!important}
-/* fuel the humans — header spans the top; image + body align below (image top = body top);
-   stacks header -> image -> body on small screens */
-.fuel{display:grid;grid-template-columns:520px 1fr;column-gap:80px;row-gap:36px;align-items:start;grid-template-areas:"hd hd" "media body"}
+/* fuel the humans — header spans the top; image + body sit side by side below,
+   vertically centered; stacks on small screens */
+.fuel{display:grid;grid-template-columns:35fr 65fr;column-gap:72px;row-gap:36px;align-items:center;grid-template-areas:"hd hd" "media body"}
 .fuel__hd{grid-area:hd;text-align:center;max-width:760px;margin:0 auto}
 .fuel__media{grid-area:media;min-width:1px}
 .fuel__media img{width:100%;height:auto;display:block;border-radius:16px}
@@ -1884,14 +1886,17 @@ html.is-preview .devbar{display:none}
   <div class="sec sec--tight sec--tint">
     <div class="wrap">
       <p class="eyebrow rv" style="text-align:center;margin-bottom:44px">Backed by</p>
-      <div class="logos rv" style="--d:80ms;flex-wrap:wrap;justify-content:center;gap:36px 52px">
-        <div class="logo-cell"><img class="logo-img logo-img--spider" src="assets/spidercapital.svg" alt="Spider Capital"><span class="logo-cap">Spider Capital</span></div>
-        <div class="logo-cell"><img class="logo-img" src="assets/techstarsboston.png" alt="Techstars"><span class="logo-cap">Techstars</span></div>
-        <div class="logo-cell"><img class="logo-img" src="assets/massive_vc.jpeg" alt="Massive"><span class="logo-cap">Massive</span></div>
-        <div class="logo-cell"><img class="logo-img" src="assets/counterpartventures.png" alt="Counterpart"><span class="logo-cap">Counterpart</span></div>
-        <div class="logo-cell"><img class="logo-img" src="assets/eclipsecapital.avif" alt="Eclipse"><span class="logo-cap">Eclipse</span></div>
-        <div class="logo-cell"><img class="logo-img" src="assets/motivateventurecapital.svg" alt="Motivate"><span class="logo-cap">Motivate</span></div>
-        <div class="logo-cell"><img class="logo-img" src="assets/brickandmortar.webp" alt="Brick &amp; Mortar"><span class="logo-cap">Brick &amp; Mortar</span></div>
+      <div class="logos logos--lead rv" style="--d:80ms;flex-wrap:wrap;justify-content:center;gap:32px 64px">
+        <div class="logo-cell"><img class="logo-img" src="assets/counterpart_c.png" alt="Counterpart"></div>
+        <div class="logo-cell"><img class="logo-img" src="assets/brickmortar_c.png" alt="Brick &amp; Mortar"></div>
+        <div class="logo-cell"><img class="logo-img" src="assets/eclipse_c.png" alt="Eclipse"></div>
+      </div>
+      <div class="logos rv" style="--d:140ms;flex-wrap:wrap;justify-content:center;gap:36px 52px;margin-top:40px">
+        <div class="logo-cell"><img class="logo-img logo-img--spider" src="assets/spidercapital.svg" alt="Spider Capital"></div>
+        <div class="logo-cell"><img class="logo-img" src="assets/techstars_t.png" alt="Techstars"></div>
+        <div class="logo-cell"><img class="logo-img" src="assets/massive_t.png" alt="Massive"></div>
+        <div class="logo-cell"><img class="logo-img" src="assets/motivateventurecapital.svg" alt="Motivate"></div>
+        <div class="logo-cell"><img class="logo-img" src="assets/bold_capital_c.png" alt="Bold Capital"></div>
       </div>
       <p class="small rv" style="text-align:center;max-width:640px;margin:36px auto 0">We've raised from people with deep experience across AI, property and insurance — people who do more than write cheques.</p>
     </div>
@@ -2103,7 +2108,11 @@ html.is-preview .devbar{display:none}
           <h2 class="display display--xs">Our AI empowers adjusters. It does not replace them.</h2>
         </div>
         <div class="fuel__media">
-          <img src="assets/adjuster_and_family.svg" alt="An adjuster with a family">
+          <picture>
+            <source media="(max-width:600px)" srcset="assets/adjuster_and_family_wide.svg">
+            <source media="(max-width:900px)" srcset="assets/adjuster_and_family.svg">
+            <img src="assets/adjuster_and_family_wide.svg" alt="An adjuster with a family">
+          </picture>
         </div>
         <div class="fuel__body stack-24">
           <p class="body">Adjusters do one of the hardest jobs in insurance. They measure, price, and document a loss while sitting across from a family on the worst week of its year, and they have to get both parts right. Fewer people are choosing that work, and the profession is losing experience faster than it can replace it.</p>
