@@ -586,12 +586,13 @@ h3{font-family:var(--body);font-weight:700;font-size:20px;line-height:1.4;margin
 }
 @media(max-width:520px){.vsw__nav{grid-template-columns:1fr}}
 /* responsible AI — "types of AI we use" grouped panel */
-.aikinds{background:var(--paper-2);border:1px solid var(--hair-2);border-radius:18px;padding:34px 32px}
-.aikinds .eyebrow{margin-bottom:6px}
-.aikinds__list{margin-top:12px}
-.aikinds__i{display:flex;gap:18px;align-items:flex-start;padding:20px 0;border-top:1px solid var(--hair)}
-.aikinds__i:first-child{border-top:0;padding-top:6px}
-.aikinds__i:last-child{padding-bottom:6px}
+.aikinds{background:var(--paper-2);border:1px solid var(--hair-2);border-radius:18px;padding:40px}
+.aikinds__list{display:grid;grid-template-columns:1fr 1fr;gap:36px 44px}
+.aikinds__i{display:flex;gap:16px;align-items:flex-start}
+@media(max-width:680px){
+  .aikinds{padding:28px 24px}
+  .aikinds__list{grid-template-columns:1fr;gap:26px}
+}
 .aikinds__ic{flex:0 0 auto;width:36px;height:36px;object-fit:contain;display:block;margin-top:2px}
 .aikinds__t{font-family:var(--heading);font-weight:600;font-size:18px;color:var(--ink);margin-bottom:4px}
 .aikinds__d{font-size:15px;line-height:1.55;color:var(--mut)}
@@ -617,14 +618,12 @@ h3{font-family:var(--body);font-weight:700;font-size:20px;line-height:1.4;margin
 @media(max-width:760px){
   .fuel{grid-template-columns:1fr;grid-template-areas:"hd" "media" "body";row-gap:28px}
 }
-/* responsible AI & security — centered item list */
-.secitems{max-width:980px;margin:48px auto 0;display:grid;grid-template-columns:repeat(3,1fr);align-items:stretch}
-.secitem{padding:2px 26px 4px;border-left:1px solid var(--hair);text-align:left}
-.secitem__t{font-family:var(--heading);font-weight:600;font-size:20px;letter-spacing:-.01em;color:var(--magenta-d);margin-bottom:8px}
-.secitems .body{margin:0}
+/* responsible AI & security — reuses the .trio card component */
+.secitems{max-width:1000px;margin:48px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;align-items:stretch}
+.trio__c.trio__c--text{padding-bottom:32px}
+.trio__c--text .trio__t{font-size:20px;font-weight:600;letter-spacing:-.01em;color:var(--magenta-d)}
 @media(max-width:760px){
-  .secitems{grid-template-columns:1fr;max-width:520px;gap:0}
-  .secitem{padding:20px 0 20px 22px}
+  .secitems{grid-template-columns:1fr;max-width:520px}
 }
 /* SOC compliance badge — distinct treatment for the description-less item */
 .soc{padding-top:26px}
@@ -1043,6 +1042,7 @@ body.is-intro .devbar{display:none}
    Stripe-style (Figma 897:6703): equal tall cards, a hairline frame,
    a small icon chip, a light heading, and the artwork filling below. */
 .sec--grey{background:#F8F8F8}
+.sec--grey,.sec--grey + .sec{padding-top:var(--secpad)!important}
 .btn--magline{border:2px solid #FF00FF;color:#FF00FF;padding:16px 24px;font-size:16px;font-weight:500;transition:background-color .2s ease,border-color .2s ease,color .2s ease}
 .btn--magline:hover{background:var(--magenta-d);border-color:var(--magenta-d);color:#fff}
 
@@ -1434,7 +1434,7 @@ html.is-preview .devbar{display:none}
       <div class="wrap">
         <div class="hero__copy hero__copy--glass">
           <h1 class="display">Turn simple property photos into objective truth.</h1>
-          <p class="lede" style="margin-top:24px;max-width:620px">Behind every claim is a family waiting to go home. Elara Spatial turns a few interior photos from any smartphone into a finished, traceable damage estimate &mdash; the same day. Less waiting, less ambiguity, and every decision backed by evidence.</p>
+          <p class="lede" style="margin-top:24px;max-width:620px">Behind every claim is a family waiting to go home. Elara Spatial turns a few interior photos from any smartphone into a finished, traceable damage estimate, the same day. Less waiting, less ambiguity, and every decision backed by evidence.</p>
         </div>
         <div class="btns" style="margin-top:28px">
           <button class="btn btn--pink" data-cta>Request a Demo</button>
@@ -1941,29 +1941,29 @@ html.is-preview .devbar{display:none}
           <p class="lede">Lumasite fits the workflow you already run. Choose the capture path that matches how your claims come in.</p>
         </div>
       </div>
-      <div class="tri rv" style="--d:100ms;margin-top:72px">
-        <div class="tri__i">
+      <div class="tri" style="margin-top:72px">
+        <div class="tri__i rv" style="--d:0ms">
           <div class="tri__ill">
             <span class="tri__photo"><img src="assets/deploy-1.jpg" alt="Policyholder photographing water damage on a phone" loading="lazy" width="560" height="560"></span>
           </div>
           <p class="tri__t">Policyholder at FNOL</p>
           <p class="small">Capture happens during the first-notice-of-loss call. The policyholder receives a link, walks through the damaged rooms, and takes the photos. A desk adjuster receives both the claim and the draft estimate.</p>
         </div>
-        <div class="tri__i">
+        <div class="tri__i rv" style="--d:90ms">
           <div class="tri__ill">
             <span class="tri__photo"><img src="assets/deploy-2.jpg" alt="Mitigation technician checking a wall with a moisture meter" loading="lazy" width="560" height="560"></span>
           </div>
           <p class="tri__t">Mitigation technician</p>
           <p class="small">Before or after mitigation work, the technician photographs the damaged rooms, noting pre-existing conditions and the full extent of the loss. A desk adjuster receives the documentation and a full draft estimate.</p>
         </div>
-        <div class="tri__i">
+        <div class="tri__i rv" style="--d:180ms">
           <div class="tri__ill">
             <span class="tri__photo"><img src="assets/deploy-3.jpg" alt="Field adjuster inspecting a damaged room with a tablet" loading="lazy" width="560" height="560"></span>
           </div>
           <p class="tri__t">Field adjuster</p>
           <p class="small">Documentation takes minutes onsite instead of hours. By the time the adjuster is back at the desk, a full draft estimate is waiting for review.</p>
         </div>
-        <div class="tri__i">
+        <div class="tri__i rv" style="--d:270ms">
           <div class="tri__ill">
             <span class="tri__photo"><img src="assets/deploy-4.jpg" alt="Desk adjuster reviewing an estimate on a laptop" loading="lazy" width="560" height="560"></span>
           </div>
@@ -2115,9 +2115,9 @@ html.is-preview .devbar{display:none}
           </picture>
         </div>
         <div class="fuel__body stack-24">
-          <p class="body">Adjusters do one of the hardest jobs in insurance. They measure, price, and document a loss while sitting across from a family on the worst week of its year, and they have to get both parts right. Fewer people are choosing that work, and the profession is losing experience faster than it can replace it.</p>
-          <p class="body">Lumasite takes the measuring, the labeling, and the line-item selection off their plate, so their skill goes where no software can follow: the hard call, the tough conversation, the person waiting on an answer.</p>
-          <p class="body">That&rsquo;s what we mean by fueling the humans. It&rsquo;s also why an adjuster reviews and approves every estimate before it leaves our system.</p>
+          <p class="body">Adjusters do one of insurance&rsquo;s hardest jobs: stay precise with the numbers and human with a family in their worst week.</p>
+          <p class="body">Lumasite takes measuring, labeling, and line-item selection off their plate, so their skill goes where AI can&rsquo;t: the hard call, the tough conversation, the person waiting.</p>
+          <p class="body">That&rsquo;s fueling the humans, not replacing them.</p>
         </div>
       </div>
     </div>
@@ -2127,35 +2127,30 @@ html.is-preview .devbar{display:none}
   <div class="sec sec--tight sec--ink">
     <div class="contour" style="color:#fff;opacity:.05;inset:-4%;-webkit-mask-size:auto 100vh;mask-size:auto 100vh;animation:driftSoft 95s linear infinite"></div>
     <div class="wrap">
-      <div class="row rv" style="gap:72px">
-        <div class="flex1 stack-24" style="min-width:1px">
-          <div>
-            <p class="eyebrow" style="margin-bottom:22px">Responsible AI</p>
-            <h2 class="display display--xs">AI built to be trusted by adjusters, carriers and regulators.</h2>
-          </div>
-          <p class="body">AI is not a stand-in for human judgment. Elara Spatial doesn&rsquo;t make coverage decisions or replace adjusters. It documents the objective truth of a room so adjusters can work faster and more accurately. Every estimate is reviewed by a human and grounded in carrier-specific guidelines.</p>
-          <p class="body">Lumasite isn&rsquo;t a chatbot. It&rsquo;s a purpose-built combination of computer vision and other kinds of machine learning.</p>
-        </div>
-        <div class="flex1" style="min-width:1px">
-          <div class="aikinds">
-            <p class="eyebrow">Types of AI we use</p>
-            <div class="aikinds__list">
-              <div class="aikinds__i">
+      <div class="mid rv" style="max-width:840px;margin-left:auto;margin-right:auto">
+        <p class="eyebrow" style="margin-bottom:22px">Responsible AI</p>
+        <h2 class="display display--xs">AI built to be trusted by adjusters, carriers and regulators.</h2>
+      </div>
+      <div class="aikinds" style="margin-top:48px">
+        <div class="aikinds__list">
+              <div class="aikinds__i rv" style="--d:0ms">
                 <img class="aikinds__ic" src="assets/glyph_magenta.png" alt="">
-                <div><p class="aikinds__t">Computer vision</p><p class="aikinds__d">To recognize rooms, materials and damage in images.</p></div>
+                <div><p class="aikinds__t">Lumasite is not a chatbot</p><p class="aikinds__d">It&rsquo;s computer vision &amp; AI built for one job: turning interior photos into a finished damage estimate.</p></div>
               </div>
-              <div class="aikinds__i">
+              <div class="aikinds__i rv" style="--d:80ms">
                 <img class="aikinds__ic" src="assets/glyph_magenta.png" alt="">
-                <div><p class="aikinds__t">Generative models</p><p class="aikinds__d">To create a 3D view of a room from photos.</p></div>
+                <div><p class="aikinds__t">Every estimate is reviewed by an adjuster</p><p class="aikinds__d">AI is not a stand-in for human judgment. An experienced adjuster reviews and approves every estimate before it leaves our system.</p></div>
               </div>
-              <div class="aikinds__i">
+              <div class="aikinds__i rv" style="--d:160ms">
                 <img class="aikinds__ic" src="assets/glyph_magenta.png" alt="">
-                <div><p class="aikinds__t">Vision-language models (VLMs)</p><p class="aikinds__d">To help write code and technical instructions for our models.</p></div>
+                <div><p class="aikinds__t">Lumasite makes no coverage decisions</p><p class="aikinds__d">Those stay with people, who can weigh what&rsquo;s fair and answer for the call.</p></div>
+              </div>
+              <div class="aikinds__i rv" style="--d:240ms">
+                <img class="aikinds__ic" src="assets/glyph_magenta.png" alt="">
+                <div><p class="aikinds__t">Lumasite shows its work</p><p class="aikinds__d">Every line item traces back to the photo it came from, so an estimate can be checked from photo to dollar. Glass box, not black box.</p></div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
     </div>
   </div>
 
@@ -2167,19 +2162,19 @@ html.is-preview .devbar{display:none}
         <h2 class="display display--sm">Our models run on private, independent, secure infrastructure.</h2>
         <p class="lede">We do not use chatbots or any generative AI platforms like ChatGPT or Claude to process claims.</p>
       </div>
-      <div class="secitems rv" style="--d:100ms">
-        <div class="secitem">
-          <h3 class="secitem__t">Deterministic estimates</h3>
-          <p class="body">No LLMs or generative AI create, modify, or select a single line of an estimate. A deterministic system, configured to each carrier&rsquo;s guidelines, selects every line item.</p>
-        </div>
-        <div class="secitem">
-          <h3 class="secitem__t">Human review</h3>
-          <p class="body">A human reviews every output before it leaves our system.</p>
-        </div>
-        <div class="secitem">
-          <h3 class="secitem__t">SOC 2 Type II compliant</h3>
-          <p class="body">Independently audited security controls, reviewed on an ongoing basis.</p>
-        </div>
+      <div class="secitems">
+        <article class="trio__c trio__c--text rv" style="--d:0ms">
+          <div class="trio__hd"><p class="trio__t">Deterministic estimates</p></div>
+          <p class="trio__d">No LLMs or generative AI create, modify, or select a single line of an estimate. A deterministic system, configured to each carrier&rsquo;s guidelines, selects every line item.</p>
+        </article>
+        <article class="trio__c trio__c--text rv" style="--d:90ms">
+          <div class="trio__hd"><p class="trio__t">Human review</p></div>
+          <p class="trio__d">A human reviews every output before it leaves our system.</p>
+        </article>
+        <article class="trio__c trio__c--text rv" style="--d:180ms">
+          <div class="trio__hd"><p class="trio__t">SOC 2 Type II compliant</p></div>
+          <p class="trio__d">Independently audited security controls, reviewed on an ongoing basis.</p>
+        </article>
       </div>
     </div>
   </div>
@@ -2188,19 +2183,25 @@ html.is-preview .devbar{display:none}
   <div class="sec sec--tight sec--tint">
     <div class="wrap">
       <div class="row" style="gap:100px">
-        <div style="flex:0 0 380px" class="rv">
+        <div style="flex:0 0 420px" class="rv">
           <p class="eyebrow" style="margin-bottom:22px">Privacy by design</p>
           <h2 class="display display--xs">Privacy is built in, not bolted on.</h2>
+          <p class="body" style="margin-top:26px">We designed for AI &amp; Privacy regulation from the start, so the governance regulators ask for is there by default &mdash; not something you inherit as a compliance problem later.</p>
         </div>
-        <div class="flex1 rv" style="--d:100ms">
-          <p class="body">We strip all personally identifiable information from every claim before processing begins, and our models learn only from de-identified images. Homeowner data never trains our AI.</p>
-          <p class="body" style="margin-top:18px">For any estimate, we can show when PII was removed, which models ran, what rules were applied, who reviewed the result, and what changed. Glass box, not black box.</p>
-          <p class="body" style="margin-top:18px">We designed for AI regulation from the start, so the governance regulators ask for is there by default &mdash; not something you inherit as a compliance problem later.</p>
-          <div class="dense" style="grid-template-columns:repeat(2,1fr);margin-top:34px">
-            <div class="dense__i"><div class="dense__th"><svg viewBox="0 0 74.82 75.28" style="color:var(--magenta)"><use href="#g-shell"/></svg></div><div><p class="dense__t">PII removed at capture</p><p class="dense__d">Faces, documents, and screens are stripped before processing.</p></div></div>
-            <div class="dense__i"><div class="dense__th"><svg viewBox="0 0 74.82 75.28" style="color:var(--cyan)"><use href="#g-diamond"/></svg></div><div><p class="dense__t">Governed by your contract</p><p class="dense__d">Data is processed only for the purposes you&rsquo;ve agreed to.</p></div></div>
-            <div class="dense__i"><div class="dense__th"><svg viewBox="0 0 74.82 75.28" style="color:var(--lav)"><use href="#g-dot"/></svg></div><div><p class="dense__t">De-identified end to end</p><p class="dense__d">Only de-identified data moves through the system.</p></div></div>
-            <div class="dense__i"><div class="dense__th"><svg viewBox="0 0 74.82 75.28" style="color:var(--magenta)"><use href="#g-mark"/></svg></div><div><p class="dense__t">Full traceability and audit logs</p><p class="dense__d">Every model version, rule, and review is recorded.</p></div></div>
+        <div class="flex1">
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div class="dense__i rv" style="--d:0ms">
+              <div class="dense__th"><svg viewBox="0 0 74.82 75.28" style="color:var(--magenta)"><use href="#g-shell"/></svg></div>
+              <div><p class="aikinds__t">PII Removed</p><p class="aikinds__d">We strip all personally identified information before processing begins.</p></div>
+            </div>
+            <div class="dense__i rv" style="--d:80ms">
+              <div class="dense__th"><svg viewBox="0 0 74.82 75.28" style="color:var(--magenta)"><use href="#g-shell"/></svg></div>
+              <div><p class="aikinds__t">Governed by your contract</p><p class="aikinds__d">Data is processed only for the purposes you&rsquo;ve agreed to.</p></div>
+            </div>
+            <div class="dense__i rv" style="--d:160ms">
+              <div class="dense__th"><svg viewBox="0 0 74.82 75.28" style="color:var(--magenta)"><use href="#g-shell"/></svg></div>
+              <div><p class="aikinds__t">De-identified data for training</p><p class="aikinds__d">Our algorithms learn based on de-identified data only.</p></div>
+            </div>
           </div>
         </div>
       </div>
