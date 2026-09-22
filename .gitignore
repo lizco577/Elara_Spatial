@@ -15,3 +15,12 @@
 
 # local backup of previous repo
 .git-old/
+
+# unused source/originals kept locally only (optimized versions are committed)
+assets/bold_capital.jpg
+assets/bold_capital_t.png
+assets/counterpart_t.png
+assets/deskadjuster.jpeg
+assets/fieldadj.jpeg
+assets/mitigationtech.jpeg
+assets/policyholderFNOL.jpeg
