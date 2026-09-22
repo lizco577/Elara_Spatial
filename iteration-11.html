@@ -1910,7 +1910,7 @@ html.is-preview .devbar{display:none}
       <p class="eyebrow rv">Careers</p>
       <h2 class="display display--sm rv" style="--d:80ms">Help families get home sooner.</h2>
       <p class="rv" style="--d:120ms">Hard problems, solved alongside people who care about getting them right.</p>
-      <div class="btns rv" style="--d:200ms;justify-content:center;margin-top:22px"><button class="btn btn--white">View open roles</button></div>
+      <div class="btns rv" style="--d:200ms;justify-content:center;margin-top:22px"><button class="btn btn--white" data-goto="careers">View open roles</button></div>
     </div>
   </section>
 </section>
@@ -2488,6 +2488,31 @@ html.is-preview .devbar{display:none}
   </div>
 
 </section>
+<!-- ================================ CAREERS ================================ -->
+<section class="page" id="page-careers" data-page="careers">
+
+  <div class="hero hero--lav" style="height:520px" data-hero>
+    <div class="cta__blob" style="left:-160px;top:-220px"></div>
+    <div class="cta__blob" style="right:-200px;bottom:-260px"></div>
+    <div class="contour" style="opacity:.2"></div>
+    <div class="hero__inner">
+      <div class="wrap">
+        <p class="eyebrow" style="margin-bottom:22px">Careers</p>
+        <h1 class="display display--sm" style="max-width:760px">Careers at Elara Spatial</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="wrap">
+      <div class="mid rv" style="max-width:680px">
+        <p class="lede" style="color:var(--ink)">We don&rsquo;t have any open roles right now, but we&rsquo;re always glad to meet talented people who care about what we&rsquo;re building. If turning property claims into something faster, fairer, and more transparent sounds like your kind of problem, we&rsquo;d love to hear from you.</p>
+        <p class="body" style="margin-top:20px">Send your resume and a short note about what you&rsquo;d want to work on to <a href="mailto:careers@elaraspatial.ai" style="color:var(--magenta-d);font-weight:500">careers@elaraspatial.ai</a>.</p>
+      </div>
+    </div>
+  </div>
+
+</section>
 </main>
 <footer class="footer">
   <div class="wrap">
@@ -2508,8 +2533,7 @@ html.is-preview .devbar{display:none}
         <div class="footer__col">
           <p class="footer__h">Company</p>
           <button data-goto="company">Company</button>
-          <!-- TODO: link to the open-roles page once it exists -->
-          <button>Careers</button>
+          <button data-goto="careers">Careers</button>
         </div>
         <div class="footer__col">
           <p class="footer__h">Get in touch</p>
@@ -2535,7 +2559,7 @@ html.is-preview .devbar{display:none}
 (function () {
   'use strict';
 
-  var BUILT  = ['whatitis', 'product', 'rollout', 'responsible', 'company', 'faq', 'contact'];
+  var BUILT  = ['whatitis', 'product', 'rollout', 'responsible', 'company', 'faq', 'contact', 'careers'];
   var TITLES = {
     whatitis:    'Elara Spatial — Turn property photos into objective truth',
     product:     'Product — Elara Spatial',
@@ -2544,7 +2568,8 @@ html.is-preview .devbar{display:none}
     company:     'Company — Elara Spatial',
     blog:        'Blog — Elara Spatial',
     faq:         'FAQ — Elara Spatial',
-    contact:     'Contact — Elara Spatial'
+    contact:     'Contact — Elara Spatial',
+    careers:     'Careers — Elara Spatial'
   };
 
   var pages    = Array.prototype.slice.call(document.querySelectorAll('.page'));
