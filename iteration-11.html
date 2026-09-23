@@ -138,20 +138,18 @@ h3{font-family:var(--body);font-weight:700;font-size:20px;line-height:1.4;margin
 /* ---------------- buttons ---------------- */
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  padding:13px 24px;border-radius:0;border:1px solid transparent;
+  padding:13px 24px;border-radius:1000px;border:1px solid transparent;
   background:transparent;
   font-family:var(--body);font-weight:500;font-size:15px;line-height:1.2;
   cursor:pointer;text-decoration:none;white-space:nowrap;
   transition:background-color .22s ease,color .22s ease,border-color .22s ease;
 }
+/* consistent hover for every button: black fill, magenta text */
+.btn:hover{background:#0B0B0C!important;color:#FF00FF!important;border-color:#0B0B0C!important}
 .btn--ink{background:#FF00FF;color:#fff}
 .btn--ink:hover{background:#2a2a2e}
-.btn--soft{background:var(--paper-2);color:var(--ink)}
-.btn--soft:hover{background:var(--paper-3)}
 .btn--line{border-color:var(--hair);color:var(--ink)}
 .btn--line:hover{border-color:var(--ink)}
-.btn--onplate{background:rgba(255,255,255,.94);color:var(--ink)}
-.btn--onplate:hover{background:#fff}
 /* solid magenta CTA (Figma 155:3565) — 176x51, 16/24, Inter Bold 16 */
 .btn--pink{background:var(--magenta-d);color:#fff;padding:16px 24px;font-size:16px;font-weight:500}
 .btn--pink:hover{background:#B800B8}
@@ -1031,7 +1029,7 @@ body.is-intro .devbar{display:none}
 .cta-band__in h2{color:var(--ink)}
 .cta-band__in p{color:rgba(0,0,0,.72);font-size:19px;line-height:1.62;margin-top:12px}
 .cta-band__btns{display:flex;gap:12px;justify-content:center;margin-top:30px}
-.btn--sq{border-radius:0}
+.btn--sq{border-radius:1000px}
 .cta-band__btns .btn{height:46px;padding:13px 24px}
 /* colour variants — same notched shape, per-page colour preserved */
 .cta-band--lav{background:var(--lav)}
@@ -1042,7 +1040,7 @@ body.is-intro .devbar{display:none}
 .cta-band--lav .cta-band__in p,.cta-band--mag .cta-band__in p{color:rgba(255,255,255,.88)}
 .cta-band--lav .contour{background-image:linear-gradient(160deg,#9FA0FF 0%,#FFFFFF 100%)}
 .cta-band--cyan .contour{background-image:linear-gradient(160deg,#7DFFFF 0%,#FFFFFF 100%)}
-.btn--white{background:rgba(255,255,255,.94);color:#000;border-color:transparent}
+.btn--white{background:#0B0B0C;color:#fff;border-color:transparent}
 .btn--white:hover{background:#fff}
 .btn--mag{background:#0B0B0C;color:#fff;border-color:rgba(255,255,255,.16)}
 .btn--mag:hover{background:#e800e8}
@@ -1052,8 +1050,6 @@ body.is-intro .devbar{display:none}
    a small icon chip, a light heading, and the artwork filling below. */
 .sec--grey{background:#F8F8F8}
 .sec--grey,.sec--grey + .sec{padding-top:var(--secpad)!important}
-.btn--magline{border:2px solid #FF00FF;color:#FF00FF;padding:16px 24px;font-size:16px;font-weight:500;transition:background-color .2s ease,border-color .2s ease,color .2s ease}
-.btn--magline:hover{background:var(--magenta-d);border-color:var(--magenta-d);color:#fff}
 
 .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .trio__c{
@@ -1470,7 +1466,7 @@ html.is-preview .devbar{display:none}
         </div>
         <div class="flex1 stack-24" style="min-width:1px">
           <p class="lede">Property claims still move at the speed of paperwork: inspections take days, and policyholders wait weeks for an estimate that should take hours. The moment after loss should be the start of rebuilding &mdash; not the start of waiting.</p>
-          <div class="btns"><button class="btn btn--magline" data-goto="product">See how it works</button></div>
+          <div class="btns"><button class="btn btn--white" data-goto="product">See how it works</button></div>
         </div>
       </div>
 
@@ -1553,7 +1549,6 @@ html.is-preview .devbar{display:none}
           <h2 class="display display--xs">Be the carrier that ends the waiting.</h2>
           <p>Let us show you how Elara Spatial fits seamlessly<br>into your adjusters&rsquo; workflow.</p>
           <div class="cta-band__btns">
-            <button class="btn btn--sq btn--white" data-goto="contact">Request a Demo</button>
             <button class="btn btn--sq btn--mag" data-goto="product">See how it works</button>
           </div>
         </div>
@@ -2289,7 +2284,7 @@ html.is-preview .devbar{display:none}
           <p class="post__m">Featured &nbsp;·&nbsp; Responsible AI &nbsp;·&nbsp; 8 min read</p>
           <h2 class="display display--xs" style="max-width:440px">What “human in the loop” has to mean before regulators arrive</h2>
           <p class="body" style="margin-top:18px">Everyone claims human oversight. Very few can show which model ran, what it changed, and who signed it off. Here's the audit trail we think the industry will be held to.</p>
-          <div class="btns" style="margin-top:26px"><button class="btn btn--soft">Read the piece</button></div>
+          <div class="btns" style="margin-top:26px"><button class="btn btn--white">Read the piece</button></div>
         </div>
       </div>
     </div>
@@ -2371,7 +2366,7 @@ html.is-preview .devbar{display:none}
           <h2 class="display display--xs" style="color:#fff">Want us in your inbox?</h2>
           <p class="lede" style="color:rgba(255,255,255,.72);margin-top:18px">We only publish a few times each quarter, so you won't be bombarded.</p>
           <div class="btns" style="justify-content:center;margin-top:30px">
-            <button class="btn btn--onplate">Follow on LinkedIn</button>
+            <button class="btn btn--white">Follow on LinkedIn</button>
           </div>
         </div>
       </div>
@@ -2464,9 +2459,9 @@ html.is-preview .devbar{display:none}
         <div style="flex:0 0 420px" class="rv">
           <p class="lede" style="color:var(--ink)">We'd like to hear from you. You'll get a real response from a real human, usually within one business day.</p>
           <div class="cinfo" style="margin-top:44px">
-            <div class="cinfo__i"><span class="cinfo__l">General</span><a class="cinfo__v" href="mailto:hello@elaraspatial.com">hello@elaraspatial.com</a></div>
-            <div class="cinfo__i"><span class="cinfo__l">Sales &amp; demos</span><a class="cinfo__v" href="mailto:sales@elaraspatial.com">sales@elaraspatial.com</a></div>
-            <div class="cinfo__i"><span class="cinfo__l">Press &amp; media</span><a class="cinfo__v" href="mailto:press@elaraspatial.com">press@elaraspatial.com</a></div>
+            <div class="cinfo__i"><span class="cinfo__l">General</span><a class="cinfo__v" href="mailto:hello@elaraspatial.ai">hello@elaraspatial.ai</a></div>
+            <div class="cinfo__i"><span class="cinfo__l">Sales &amp; demos</span><a class="cinfo__v" href="mailto:sales@elaraspatial.ai">sales@elaraspatial.ai</a></div>
+            <div class="cinfo__i"><span class="cinfo__l">Press &amp; media</span><a class="cinfo__v" href="mailto:press@elaraspatial.ai">press@elaraspatial.ai</a></div>
           </div>
         </div>
 
@@ -2574,9 +2569,9 @@ html.is-preview .devbar{display:none}
         </div>
         <div class="footer__col">
           <p class="footer__h">Get in touch</p>
-          <a href="mailto:hello@elaraspatial.com">hello@elaraspatial.com</a>
-          <a href="mailto:sales@elaraspatial.com">sales@elaraspatial.com</a>
-          <a href="mailto:press@elaraspatial.com">press@elaraspatial.com</a>
+          <a href="mailto:hello@elaraspatial.ai">hello@elaraspatial.ai</a>
+          <a href="mailto:sales@elaraspatial.ai">sales@elaraspatial.ai</a>
+          <a href="mailto:press@elaraspatial.ai">press@elaraspatial.ai</a>
         </div>
       </div>
     </div>
