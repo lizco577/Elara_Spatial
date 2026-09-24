@@ -2605,9 +2605,11 @@ html.is-preview .devbar{display:none}
       };
       if (!o.track || !o.stage) return;
       if (p.classList.contains('is-static')) return;
-      if (reduced) {
+      /* reduced-motion OR touch/mobile: scroll-scrubbing video seek is unreliable
+         on mobile, so fall back to an inline looping play instead */
+      if (reduced || mqFlat.matches) {
         p.classList.add('is-static');
-        if (o.vid) { o.vid.loop = true; o.vid.play().catch(function () {}); }
+        if (o.vid) { o.vid.loop = true; o.vid.setAttribute('autoplay', ''); o.vid.play().catch(function () {}); }
         return;
       }
       if (o.vid) {
