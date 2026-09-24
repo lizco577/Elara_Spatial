@@ -1174,7 +1174,10 @@ html.is-preview .devbar{display:none}
   h2{font-size:28px}
   .lede{font-size:17px}
 
-  .hero--home{--copy-inset:0%}
+  .hero--home{--copy-inset:0%;height:auto;min-height:0}
+  .hero--home .hero__inner{position:static;padding:96px 0 8px}
+  .hero--home .hero__copy--glass{margin-left:0;padding:0}
+  .hero--home .btns{margin-left:0}
   .pin__steps{grid-template-columns:1fr}
   .posts{grid-template-columns:1fr}
   .form__row{flex-direction:column;gap:26px}
